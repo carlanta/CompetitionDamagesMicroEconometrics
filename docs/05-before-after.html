@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Método antes-y-después (Before-and-After) – Cuantificación de Daños Antitrust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./06-comparables.html" rel="next">
+<link href="./04-datos-evidencia.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-before-after.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Método antes-y-después (<em>Before-and-After</em>)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Cuantificación de Daños Antitrust</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/carlanta/CompetitionDamagesMicroEconometrics" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prólogo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduccion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a la cuantificación de daños económicos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-conductas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conductas ilícitas y su impacto económico</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-causalidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Causalidad, atribución y concurrencia de causas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-datos-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datos y evidencia para la cuantificación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-before-after.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Método antes-y-después (<em>Before-and-After</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-comparables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Método de comparables (<em>Yardstick</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-did.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Diferencias en diferencias (DID)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-sobreprecio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimación del sobreprecio (<em>Overcharge</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-passing-on.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">El <em>passing-on</em> y la cadena de distribución</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-lucro-cesante.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Estimación del lucro cesante (<em>Lost Profits</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-analisis-financiero.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Análisis financiero-contable del daño</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-endogeneidad-iv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Endogeneidad y variables instrumentales</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-panel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos de panel y efectos fijos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-control-sintetico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Control sintético</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-regresion-cuantilica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Regresión cuantílica y efectos heterogéneos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-intereses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Actualización financiera y cálculo de intereses</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-sensibilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Análisis de sensibilidad y robustez</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-errores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Errores frecuentes en informes periciales de daños</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-informe-pericial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Redacción y defensa del informe pericial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bibliografía</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#un-método-sencillo-que-obliga-a-pensar-bien" id="toc-un-método-sencillo-que-obliga-a-pensar-bien" class="nav-link active" data-scroll-target="#un-método-sencillo-que-obliga-a-pensar-bien"><span class="header-section-number">5.1</span> Un método sencillo que obliga a pensar bien</a></li>
+  <li><a href="#la-intuición-prolongar-el-pasado-hacia-un-futuro-que-no-llegó-a-existir" id="toc-la-intuición-prolongar-el-pasado-hacia-un-futuro-que-no-llegó-a-existir" class="nav-link" data-scroll-target="#la-intuición-prolongar-el-pasado-hacia-un-futuro-que-no-llegó-a-existir"><span class="header-section-number">5.2</span> La intuición: prolongar el pasado hacia un futuro que no llegó a existir</a></li>
+  <li><a href="#cuándo-es-apropiado-y-cuándo-no" id="toc-cuándo-es-apropiado-y-cuándo-no" class="nav-link" data-scroll-target="#cuándo-es-apropiado-y-cuándo-no"><span class="header-section-number">5.3</span> Cuándo es apropiado y cuándo no</a></li>
+  <li><a href="#la-idea-econométrica-modelar-el-período-previo-para-construir-el-contrafactual" id="toc-la-idea-econométrica-modelar-el-período-previo-para-construir-el-contrafactual" class="nav-link" data-scroll-target="#la-idea-econométrica-modelar-el-período-previo-para-construir-el-contrafactual"><span class="header-section-number">5.4</span> La idea econométrica: modelar el período previo para construir el contrafactual</a></li>
+  <li><a href="#implementación-en-r-un-ejemplo-completo" id="toc-implementación-en-r-un-ejemplo-completo" class="nav-link" data-scroll-target="#implementación-en-r-un-ejemplo-completo"><span class="header-section-number">5.5</span> Implementación en R: un ejemplo completo</a></li>
+  <li><a href="#relevancia-jurídica-del-método" id="toc-relevancia-jurídica-del-método" class="nav-link" data-scroll-target="#relevancia-jurídica-del-método"><span class="header-section-number">5.6</span> Relevancia jurídica del método</a></li>
+  <li><a href="#sensibilidad-cuánto-cambia-el-daño-cuando-cambia-la-especificación" id="toc-sensibilidad-cuánto-cambia-el-daño-cuando-cambia-la-especificación" class="nav-link" data-scroll-target="#sensibilidad-cuánto-cambia-el-daño-cuando-cambia-la-especificación"><span class="header-section-number">5.7</span> Sensibilidad: cuánto cambia el daño cuando cambia la especificación</a></li>
+  <li><a href="#errores-frecuentes-en-la-práctica-pericial" id="toc-errores-frecuentes-en-la-práctica-pericial" class="nav-link" data-scroll-target="#errores-frecuentes-en-la-práctica-pericial"><span class="header-section-number">5.8</span> Errores frecuentes en la práctica pericial</a></li>
+  <li><a href="#lo-que-un-tribunal-debe-entender-de-este-método" id="toc-lo-que-un-tribunal-debe-entender-de-este-método" class="nav-link" data-scroll-target="#lo-que-un-tribunal-debe-entender-de-este-método"><span class="header-section-number">5.9</span> Lo que un tribunal debe entender de este método</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/carlanta/CompetitionDamagesMicroEconometrics/blob/main/05-before-after.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="before-after" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Método antes-y-después (<em>Before-and-After</em>)</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="un-método-sencillo-que-obliga-a-pensar-bien" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="un-método-sencillo-que-obliga-a-pensar-bien"><span class="header-section-number">5.1</span> Un método sencillo que obliga a pensar bien</h2>
+<p>El método antes-y-después ocupa una posición peculiar dentro de la cuantificación de daños. Es, al mismo tiempo, uno de los métodos más intuitivos y uno de los que más fácilmente se aplica mal. Su lógica resulta accesible incluso para un lector sin formación econométrica: observar cómo se comportaba una variable antes de la conducta ilícita, proyectar esa trayectoria hacia el período posterior y comparar esa proyección con lo que efectivamente ocurrió. La diferencia entre ambas trayectorias es el daño.</p>
+<p>Precisamente por esa apariencia de sencillez, muchos informes periciales recurren a este método de forma precipitada, como si bastara con comparar el promedio de ventas antes y después de la infracción para obtener una cuantificación defendible. No es así. El método solo produce resultados sólidos cuando el perito entiende qué dinámica contenía ya la serie antes de la conducta: si existía tendencia, si había estacionalidad, si el período previo estaba limpio o ya contaminado, si hubo otras rupturas estructurales simultáneas y si la persistencia posterior del daño exige prolongar el análisis más allá del cese formal de la conducta.</p>
+<p>El objetivo de este capítulo es mostrar por qué el método antes-y-después sigue siendo una herramienta central en la práctica pericial, cuáles son sus fundamentos econométricos, en qué circunstancias resulta apropiado y cómo debe implementarse para que su aparente sencillez no se convierta en una fuente de error.</p>
+</section>
+<section id="la-intuición-prolongar-el-pasado-hacia-un-futuro-que-no-llegó-a-existir" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="la-intuición-prolongar-el-pasado-hacia-un-futuro-que-no-llegó-a-existir"><span class="header-section-number">5.2</span> La intuición: prolongar el pasado hacia un futuro que no llegó a existir</h2>
+<p>La intuición del método puede formularse de una manera muy simple. Supongamos que una empresa venía aumentando sus ventas de forma estable y con un patrón estacional reconocible hasta que se produce una conducta ilícita. A partir de ese momento, las ventas caen. La pregunta que se formula el perito es inmediata: si esa conducta no se hubiera producido, ¿habrían continuado las ventas la trayectoria que mostraban antes? El método antes-y-después responde a esta pregunta tomando el pasado como base para construir el contrafactual.</p>
+<p>No se trata, sin embargo, de una mera prolongación mecánica de la última cifra observada. Si una serie crecía cada año un 4% y presentaba picos estacionales en determinadas campañas, el contrafactual razonable no es una línea horizontal, sino una trayectoria que mantenga tanto la tendencia como la estacionalidad previas. Si el perito ignora esa dinámica interna, confundirá el daño con la evolución normal de la serie.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">105</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">72</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fecha <span class="ot">&lt;-</span> <span class="fu">seq.Date</span>(<span class="fu">as.Date</span>(<span class="st">"2018-01-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>, <span class="at">length.out =</span> n)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mes_num <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(fecha, <span class="st">"%m"</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>mes_lab <span class="ot">&lt;-</span> <span class="fu">factor</span>(mes_num, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"ene"</span>, <span class="st">"feb"</span>, <span class="st">"mar"</span>, <span class="st">"abr"</span>, <span class="st">"may"</span>, <span class="st">"jun"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"jul"</span>, <span class="st">"ago"</span>, <span class="st">"sep"</span>, <span class="st">"oct"</span>, <span class="st">"nov"</span>, <span class="st">"dic"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>inicio_infraccion <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2022-01-01"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>efecto_mes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">10</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>tendencia <span class="ot">&lt;-</span> <span class="dv">120</span> <span class="sc">+</span> <span class="fl">1.1</span> <span class="sc">*</span> t</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>estacionalidad <span class="ot">&lt;-</span> efecto_mes[mes_num]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ruido <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>ventas_cf <span class="ot">&lt;-</span> tendencia <span class="sc">+</span> estacionalidad <span class="sc">+</span> ruido</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>daño <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(fecha <span class="sc">&gt;=</span> inicio_infraccion, <span class="dv">18</span> <span class="sc">+</span> <span class="fl">0.25</span> <span class="sc">*</span> (t <span class="sc">-</span> <span class="dv">48</span>), <span class="dv">0</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>ventas_obs <span class="ot">&lt;-</span> ventas_cf <span class="sc">-</span> daño</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>df_ba <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">fecha =</span> fecha,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">t =</span> t,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">mes =</span> mes_lab,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">ventas =</span> ventas_obs</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>modelo_pre <span class="ot">&lt;-</span> <span class="fu">lm</span>(ventas <span class="sc">~</span> t <span class="sc">+</span> mes, <span class="at">data =</span> df_ba <span class="sc">|&gt;</span> <span class="fu">filter</span>(fecha <span class="sc">&lt;</span> inicio_infraccion))</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>df_ba <span class="ot">&lt;-</span> df_ba <span class="sc">|&gt;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">contrafactual =</span> <span class="fu">predict</span>(modelo_pre, <span class="at">newdata =</span> df_ba),</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">periodo =</span> <span class="fu">if_else</span>(fecha <span class="sc">&lt;</span> inicio_infraccion, <span class="st">"Preinfracción"</span>, <span class="st">"Postinfracción"</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_ba, <span class="fu">aes</span>(<span class="at">x =</span> fecha)) <span class="sc">+</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"rect"</span>,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>           <span class="at">xmin =</span> inicio_infraccion, <span class="at">xmax =</span> <span class="fu">max</span>(fecha),</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>           <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>,</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"#e74c3c"</span>, <span class="at">alpha =</span> <span class="fl">0.06</span>) <span class="sc">+</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> ventas, <span class="at">color =</span> <span class="st">"Observado"</span>), <span class="at">linewidth =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> contrafactual, <span class="at">color =</span> <span class="st">"Contrafactual"</span>), <span class="at">linewidth =</span> <span class="fl">0.9</span>,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> inicio_infraccion, <span class="at">color =</span> <span class="st">"grey50"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> inicio_infraccion, <span class="at">y =</span> <span class="fu">max</span>(df_ba<span class="sc">$</span>contrafactual) <span class="sc">+</span> <span class="dv">8</span>,</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Inicio de la conducta"</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="fl">3.1</span>, <span class="at">color =</span> <span class="st">"grey35"</span>) <span class="sc">+</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Observado"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>, <span class="st">"Contrafactual"</span> <span class="ot">=</span> <span class="st">"#2c3e50"</span>)) <span class="sc">+</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Ventas mensuales (miles)"</span>, <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-before-after-intuicion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-before-after-intuicion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-before-after_files/figure-html/fig-before-after-intuicion-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-before-after-intuicion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Lógica del método antes-y-después: el escenario contrafactual se construye proyectando la tendencia y la estacionalidad observadas antes de la conducta ilícita
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>La <a href="#fig-before-after-intuicion" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> resume la lógica del método. La línea continua representa las ventas efectivamente observadas. La línea discontinua muestra la trayectoria contrafactual estimada a partir del comportamiento previo de la serie. Mientras la empresa evoluciona con normalidad, ambas líneas coinciden razonablemente. A partir del inicio de la conducta, se abre una brecha creciente entre lo observado y lo que habría cabido esperar sin la infracción. Esa brecha es, precisamente, el daño que el método pretende medir.</p>
+<p>Esta intuición explica por qué el método resulta especialmente útil cuando el perito dispone de una serie temporal suficientemente larga y limpia antes de la infracción. En esos casos, el propio historial de la víctima contiene mucha información sobre lo que habría ocurrido en ausencia de la conducta. Pero también explica su principal debilidad: si el pasado no era estable, si la serie ya estaba afectada por otras perturbaciones o si el período previo es demasiado corto, la proyección contrafactual deja de ser fiable.</p>
+</section>
+<section id="cuándo-es-apropiado-y-cuándo-no" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="cuándo-es-apropiado-y-cuándo-no"><span class="header-section-number">5.3</span> Cuándo es apropiado y cuándo no</h2>
+<p>En la práctica pericial, el método antes-y-después funciona especialmente bien en tres tipos de situaciones. La primera aparece cuando la empresa afectada dispone de una serie histórica larga, con un patrón claro de tendencia y estacionalidad, y la conducta ilícita coincide con una ruptura visible de esa trayectoria. La segunda surge cuando no existen comparables suficientemente buenos y el historial de la propia víctima es la mejor referencia disponible. La tercera se da cuando la variable dañada responde con rapidez a la conducta, de modo que el punto de ruptura puede identificarse con precisión temporal.</p>
+<p>Su ámbito de aplicación típico incluye, por ejemplo, ventas perdidas por denigración, desvío de clientela en supuestos de imitación desleal, lucro cesante derivado de una exclusión repentina del mercado y, en algunos casos, sobreprecios cuando se dispone de un período previo no contaminado por la colusión.</p>
+<p>Pero el método deja de ser convincente cuando la serie previa es corta, errática o ya está contaminada. Si el mercado sufrió un cambio regulatorio significativo poco antes del inicio de la conducta, si hubo una pandemia, una recesión o una reestructuración empresarial que alteró la tendencia de la serie, el pasado ya no constituye una base limpia sobre la que proyectar el contrafactual. Del mismo modo, si la empresa afectada lanzó un nuevo producto, cambió de estrategia comercial o abrió una nueva línea de negocio durante el período analizado, el comportamiento previo puede no ser una guía fiable para el futuro.</p>
+<p>La pregunta correcta no es, por tanto, «¿puedo aplicar un antes-y-después?», sino «¿tengo un período previo que represente de forma razonable el mundo sin infracción?». Si la respuesta es afirmativa, el método puede ser extraordinariamente útil. Si la respuesta es dudosa, el perito debe combinarlo con comparables, controles adicionales o análisis de sensibilidad exigentes.</p>
+</section>
+<section id="la-idea-econométrica-modelar-el-período-previo-para-construir-el-contrafactual" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="la-idea-econométrica-modelar-el-período-previo-para-construir-el-contrafactual"><span class="header-section-number">5.4</span> La idea econométrica: modelar el período previo para construir el contrafactual</h2>
+<p>La formulación econométrica del método parte de una observación sencilla: la serie histórica previa contiene una estructura sistemática —tendencia, estacionalidad, ciclos y ruido aleatorio— que puede estimarse y proyectarse hacia el período posterior.</p>
+<p>Sea <span class="math inline">\(Y_t\)</span> la variable de interés, por ejemplo las ventas mensuales de la empresa afectada. En el período previo a la conducta, el perito estima un modelo del tipo:</p>
+<p><span class="math display">\[
+Y_t = \alpha + \beta t + \sum_{m=2}^{12} \gamma_m M_{mt} + \varepsilon_t
+\]</span></p>
+<p>donde <span class="math inline">\(t\)</span> captura la tendencia temporal y <span class="math inline">\(M_{mt}\)</span> representa variables indicadoras de estacionalidad mensual. El término <span class="math inline">\(\varepsilon_t\)</span> recoge la variación no explicada por el modelo.</p>
+<p>Una vez estimado este modelo sobre el período previo, el perito lo utiliza para predecir qué valores habría tomado <span class="math inline">\(Y_t\)</span> durante el período posterior si la conducta no hubiera ocurrido. Esa predicción constituye el contrafactual:</p>
+<p><span class="math display">\[
+\widehat{Y}_t^{0} = \widehat{\alpha} + \widehat{\beta} t + \sum_{m=2}^{12} \widehat{\gamma}_m M_{mt}
+\]</span></p>
+<p>El daño mensual viene dado por la diferencia entre la predicción contrafactual y el valor observado:</p>
+<p><span class="math display">\[
+D_t = \widehat{Y}_t^{0} - Y_t
+\]</span></p>
+<p>y el daño total del período es la suma de esos daños mensuales:</p>
+<p><span class="math display">\[
+D = \sum_{t \in \mathrm{post}} D_t
+\]</span></p>
+<p>Esta es la versión más básica del método, pero no la única. En ocasiones, el perito estima un modelo de intervención sobre toda la serie, incorporando una variable dicotómica que toma valor uno durante el período infractor y cero en el resto. Esa estrategia permite evaluar si existe una ruptura estadísticamente significativa coincidente con la conducta y cuantificar su magnitud media. En términos formales:</p>
+<p><span class="math display">\[
+Y_t = \alpha + \beta t + \sum_{m=2}^{12} \gamma_m M_{mt} + \delta I_t + u_t
+\]</span></p>
+<p>donde <span class="math inline">\(I_t\)</span> es una indicadora del período infractor. El coeficiente <span class="math inline">\(\delta\)</span> representa la variación media atribuible a la conducta una vez descontadas tendencia y estacionalidad.</p>
+<p>Esta formulación conecta directamente con los tests de cambio estructural. El test de Chow evalúa si los parámetros del modelo son estables antes y después de un punto de ruptura conocido. Los procedimientos CUSUM permiten detectar inestabilidad acumulada en los residuos del modelo. En la práctica pericial, estos tests no sustituyen al juicio económico del perito, pero sí ofrecen una evidencia estadística útil para respaldar que la serie experimentó una ruptura compatible con el inicio de la conducta.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo orientativo de tests de cambio estructural en R</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fit_prepost <span class="ot">&lt;-</span> <span class="fu">lm</span>(ventas <span class="sc">~</span> t <span class="sc">+</span> mes <span class="sc">+</span> periodo_infractor, <span class="at">data =</span> datos)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Chow test en un punto de ruptura conocido</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>strucchange<span class="sc">::</span><span class="fu">sctest</span>(fit_prepost, <span class="at">type =</span> <span class="st">"Chow"</span>, <span class="at">point =</span> <span class="dv">48</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># CUSUM de estabilidad paramétrica</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>efp_model <span class="ot">&lt;-</span> strucchange<span class="sc">::</span><span class="fu">efp</span>(ventas <span class="sc">~</span> t <span class="sc">+</span> mes, <span class="at">data =</span> datos, <span class="at">type =</span> <span class="st">"Rec-CUSUM"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(efp_model)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>strucchange<span class="sc">::</span><span class="fu">sctest</span>(efp_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>El fragmento anterior se muestra solo con fines ilustrativos. En la práctica, el perito no debería invocar mecánicamente estos tests sin antes verificar que el punto de ruptura propuesto tiene sentido económico y jurídico, y sin examinar la serie gráficamente. Una ruptura estadísticamente significativa no es, por sí sola, prueba suficiente de que la conducta causó el daño; del mismo modo, la ausencia de significación en una serie corta o muy ruidosa no demuestra que la conducta fuera inocua.</p>
+</section>
+<section id="implementación-en-r-un-ejemplo-completo" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="implementación-en-r-un-ejemplo-completo"><span class="header-section-number">5.5</span> Implementación en R: un ejemplo completo</h2>
+<p>La mejor manera de entender el método es ver cómo se implementa de principio a fin. En el ejemplo que sigue, se utilizan datos simulados de ventas mensuales. La empresa presenta una tendencia creciente, una estacionalidad clara y un descenso abrupto a partir de enero de 2022, coincidente con la conducta ilícita.</p>
+<p>El primer paso consiste en estimar el modelo únicamente con el período previo. El segundo, proyectar ese modelo sobre toda la serie. El tercero, comparar la predicción contrafactual con lo observado en el período posterior y sumar la diferencia.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>resumen_ba <span class="ot">&lt;-</span> df_ba <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fecha <span class="sc">&gt;=</span> inicio_infraccion) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    daño<span class="at">_mensual =</span> contrafactual <span class="sc">-</span> ventas</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Meses post-infracción</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>(),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Ventas observadas acumuladas</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">sum</span>(ventas), <span class="dv">1</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Ventas contrafactuales acumuladas</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">sum</span>(contrafactual), <span class="dv">1</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Daño total estimado</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">sum</span>(daño_mensual), <span class="dv">1</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Daño medio mensual</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(daño_mensual), <span class="dv">1</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>resumen_ba <span class="sc">|&gt;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">escape =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"hold_position"</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-before-after-dano" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-before-after-dano-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: Estimación del daño total mediante el método antes-y-después
+</figcaption>
+<div aria-describedby="tbl-before-after-dano-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Meses post-infracción</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Ventas observadas acumuladas</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Ventas contrafactuales acumuladas</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Daño total estimado</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Daño medio mensual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">4011.7</td>
+<td style="text-align: right;">4532.7</td>
+<td style="text-align: right;">521</td>
+<td style="text-align: right;">21.7</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>La <a href="#tbl-before-after-dano" class="quarto-xref">Table&nbsp;<span>5.1</span></a> resume el resultado del ejercicio. El daño total estimado no surge de una comparación de promedios brutos, sino de la suma de las diferencias entre lo que el modelo proyecta como ventas sin infracción y lo que la empresa realmente vendió durante el período afectado. Esta distinción es fundamental. En un contexto judicial, el perito debe poder explicar que no está comparando un «antes» con un «después» de forma naïf, sino ajustando el contrafactual por la dinámica normal de la serie.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_gap <span class="ot">&lt;-</span> df_ba <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fecha <span class="sc">&gt;=</span> inicio_infraccion) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(daño <span class="ot">=</span> contrafactual <span class="sc">-</span> ventas)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_gap, <span class="fu">aes</span>(<span class="at">x =</span> fecha, <span class="at">y =</span> daño)) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#c0392b"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Daño mensual estimado (miles)"</span>) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-before-after-gap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-before-after-gap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-before-after_files/figure-html/fig-before-after-gap-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-before-after-gap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Daño mensual estimado: brecha entre el contrafactual proyectado y las ventas observadas en el período posterior
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>La <a href="#fig-before-after-gap" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> permite visualizar cómo el daño no tiene por qué ser idéntico en cada mes. En series con tendencia creciente, el daño mensual puede intensificarse conforme avanza el tiempo, incluso si la conducta tiene una intensidad aparentemente constante, porque la brecha se abre sobre una trayectoria contrafactual que también sigue creciendo.</p>
+</section>
+<section id="relevancia-jurídica-del-método" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="relevancia-jurídica-del-método"><span class="header-section-number">5.6</span> Relevancia jurídica del método</h2>
+<p>Desde el punto de vista jurídico, el método antes-y-después tiene una ventaja decisiva: su lógica resulta relativamente transparente para abogados y tribunales. La Guía Práctica de la Comisión Europea lo reconoce como uno de los métodos básicos para la cuantificación del daño, precisamente porque parte de una pregunta intuitiva: cómo evolucionaba la variable antes de la infracción y qué ocurrió después.</p>
+<p>Esta transparencia lo hace particularmente útil en procedimientos donde la persuasión probatoria es tan importante como la sofisticación técnica. Un juez puede no sentirse cómodo con un modelo estructural complejo, pero sí suele comprender con relativa facilidad la idea de proyectar una trayectoria previa limpia y comparar esa proyección con la realidad posterior.</p>
+<p>Ahora bien, esa ventaja retórica no debe convertirse en indulgencia metodológica. El hecho de que el método sea comprensible no significa que el tribunal vaya a aceptar cualquier versión simplificada del mismo. Si el período previo está contaminado, si el perito no controla la estacionalidad o si ignora cambios estructurales simultáneos, la contraparte dispondrá de una vía de ataque muy eficaz.</p>
+<p>El método se utiliza con frecuencia en casos de competencia desleal —por ejemplo, en desvíos de clientela o campañas de denigración con fecha de inicio identificable— y también en algunos supuestos antitrust, sobre todo cuando la serie previa ofrece una referencia especialmente limpia. Su mayor debilidad jurídica aparece en mercados muy volátiles o cuando el demandado puede acreditar que otros factores concurrentes explican parte sustancial de la ruptura.</p>
+</section>
+<section id="sensibilidad-cuánto-cambia-el-daño-cuando-cambia-la-especificación" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="sensibilidad-cuánto-cambia-el-daño-cuando-cambia-la-especificación"><span class="header-section-number">5.7</span> Sensibilidad: cuánto cambia el daño cuando cambia la especificación</h2>
+<p>La solidez de una cuantificación antes-y-después no depende únicamente de la estimación principal, sino de la estabilidad del resultado cuando se modifican supuestos plausibles. Esto es especialmente importante porque, en la práctica, siempre existe cierta discrecionalidad sobre qué período previo utilizar, cómo modelar la tendencia o si incorporar o no la estacionalidad.</p>
+<p>El análisis de sensibilidad no debe presentarse como una concesión defensiva, sino como una demostración de madurez metodológica. El perito que muestra que su resultado se mantiene razonablemente estable al variar la especificación transmite al tribunal una imagen de rigor muy superior a la del perito que oculta cualquier alternativa metodológica.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>estimar_daño <span class="ot">&lt;-</span> <span class="cf">function</span>(data, fecha_inicio_pre, <span class="at">usar_estacionalidad =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  muestra_pre <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(fecha <span class="sc">&gt;=</span> fecha_inicio_pre, fecha <span class="sc">&lt;</span> inicio_infraccion)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (usar_estacionalidad) {</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(ventas <span class="sc">~</span> t <span class="sc">+</span> mes, <span class="at">data =</span> muestra_pre)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(ventas <span class="sc">~</span> t, <span class="at">data =</span> muestra_pre)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> data)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    daño<span class="at">_total =</span> <span class="fu">sum</span>(pred[data<span class="sc">$</span>fecha <span class="sc">&gt;=</span> inicio_infraccion] <span class="sc">-</span> data<span class="sc">$</span>ventas[data<span class="sc">$</span>fecha <span class="sc">&gt;=</span> inicio_infraccion]),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    daño<span class="at">_medio =</span> <span class="fu">mean</span>(pred[data<span class="sc">$</span>fecha <span class="sc">&gt;=</span> inicio_infraccion] <span class="sc">-</span> data<span class="sc">$</span>ventas[data<span class="sc">$</span>fecha <span class="sc">&gt;=</span> inicio_infraccion])</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>sens_ba <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  estimar_daño(df_ba, <span class="fu">as.Date</span>(<span class="st">"2018-01-01"</span>), <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Especificación</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Pre 2018-2021 + estacionalidad"</span>),</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  estimar_daño(df_ba, <span class="fu">as.Date</span>(<span class="st">"2019-01-01"</span>), <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Especificación</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Pre 2019-2021 + estacionalidad"</span>),</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  estimar_daño(df_ba, <span class="fu">as.Date</span>(<span class="st">"2020-01-01"</span>), <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Especificación</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Pre 2020-2021 + estacionalidad"</span>),</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  estimar_daño(df_ba, <span class="fu">as.Date</span>(<span class="st">"2018-01-01"</span>), <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Especificación</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Pre 2018-2021 sin estacionalidad"</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Daño total</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(daño_total, <span class="dv">1</span>),</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Daño medio mensual</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(daño_medio, <span class="dv">1</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Especificación</span><span class="st">`</span>, <span class="st">`</span><span class="at">Daño total</span><span class="st">`</span>, <span class="st">`</span><span class="at">Daño medio mensual</span><span class="st">`</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>sens_ba <span class="sc">|&gt;</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">escape =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"hold_position"</span>),</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>                <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-before-after-sensibilidad" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-before-after-sensibilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.2: Análisis de sensibilidad del método antes-y-después: el daño varía con la ventana preinfracción y con la especificación del modelo
+</figcaption>
+<div aria-describedby="tbl-before-after-sensibilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Especificación</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Daño total</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Daño medio mensual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Pre 2018-2021 + estacionalidad</td>
+<td style="text-align: right;">521.0</td>
+<td style="text-align: right;">21.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pre 2019-2021 + estacionalidad</td>
+<td style="text-align: right;">525.7</td>
+<td style="text-align: right;">21.9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pre 2020-2021 + estacionalidad</td>
+<td style="text-align: right;">481.9</td>
+<td style="text-align: right;">20.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pre 2018-2021 sin estacionalidad</td>
+<td style="text-align: right;">524.1</td>
+<td style="text-align: right;">21.8</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>La <a href="#tbl-before-after-sensibilidad" class="quarto-xref">Table&nbsp;<span>5.2</span></a> muestra un patrón muy habitual. El daño cambia cuando se acorta la ventana previa o cuando se elimina la estacionalidad del modelo. Si esas variaciones son moderadas, el perito gana credibilidad: el resultado principal parece robusto. Si son muy grandes, el mensaje no es necesariamente que el método sea inválido, pero sí que el tribunal debe ser especialmente prudente y que quizá convenga contrastar el resultado con otros enfoques, como comparables o diferencias en diferencias.</p>
+</section>
+<section id="errores-frecuentes-en-la-práctica-pericial" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="errores-frecuentes-en-la-práctica-pericial"><span class="header-section-number">5.8</span> Errores frecuentes en la práctica pericial</h2>
+<p>El error más común consiste en utilizar un período previo contaminado. A veces el problema no es que la conducta ilícita comenzara antes de la fecha formalmente identificada, sino que el mercado ya venía experimentando cambios relevantes por otras razones: reformas regulatorias, shocks de costes, reestructuraciones internas o alteraciones en la red comercial de la víctima. Si ese período se toma como base del contrafactual, el daño queda sesgado desde el origen.</p>
+<p>Otro error muy habitual es ignorar la estacionalidad. En actividades donde las ventas se concentran en determinadas campañas —navidad, turismo, campañas agrícolas, vuelta al colegio—, comparar meses postinfracción con una media previa sin controlar el patrón estacional produce resultados engañosos. El tribunal quizá no detecte el problema a primera vista, pero una contraparte técnicamente competente lo señalará con facilidad.</p>
+<p>También es frecuente modelar la tendencia de forma demasiado rígida. Una tendencia lineal puede funcionar bien en algunos mercados, pero no en todos. Si la empresa se encontraba ya en una fase de maduración o desaceleración, una extrapolación lineal al alza inflará artificialmente el contrafactual y, con él, el daño.</p>
+<p>Un cuarto error consiste en tratar como daño toda diferencia negativa entre observado y contrafactual sin examinar su persistencia y su contexto. Hay meses anómalos, operaciones extraordinarias, retrasos en la facturación o incidencias logísticas que pueden generar caídas puntuales sin relación con la conducta ilícita. El perito debe mirar la serie, no solo la hoja de cálculo.</p>
+<p>Por último, existe un error estratégico que he visto demasiadas veces: presentar el método antes-y-después como si fuera autoevidente y no necesitara análisis de sensibilidad. En realidad ocurre lo contrario. Precisamente porque el método depende mucho de la elección del período previo y de la especificación de la tendencia, el análisis de sensibilidad no es un añadido opcional, sino parte esencial de su defensa.</p>
+</section>
+<section id="lo-que-un-tribunal-debe-entender-de-este-método" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="lo-que-un-tribunal-debe-entender-de-este-método"><span class="header-section-number">5.9</span> Lo que un tribunal debe entender de este método</h2>
+<p>Si este capítulo tuviera que condensarse en una sola idea útil para un tribunal, sería la siguiente: el método antes-y-después no compara simplemente un “antes” con un “después”, sino un “después observado” con un “después estimado sin infracción” a partir de la estructura que mostraba la serie antes del daño.</p>
+<p>Cuando esa estructura previa es estable y bien modelizada, el método puede producir una cuantificación muy persuasiva. Cuando no lo es, el perito debe ser el primero en reconocer sus limitaciones y en complementar la estimación con otros enfoques. La fortaleza del método no reside en su simplicidad aparente, sino en la disciplina con la que se aplica.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./04-datos-evidencia.html" class="pagination-link" aria-label="Datos y evidencia para la cuantificación">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datos y evidencia para la cuantificación</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./06-comparables.html" class="pagination-link" aria-label="Método de comparables (*Yardstick*)">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Método de comparables (<em>Yardstick</em>)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/carlanta/CompetitionDamagesMicroEconometrics/blob/main/05-before-after.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

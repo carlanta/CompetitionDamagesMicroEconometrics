@@ -1,0 +1,311 @@
+# Estimación del sobreprecio (*Overcharge*) {#sobreprecio}
+
+```{r}
+#| label: setup-ch08
+#| include: false
+library(tidyverse)
+library(kableExtra)
+```
+
+## El sobreprecio como forma paradigmática del daño antitrust
+
+Si hubiera que elegir una imagen económica que resuma la lógica de un cártel, probablemente sería esta: compradores que pagan más de lo que habrían pagado en un mercado competitivo. Esa diferencia entre el precio efectivamente pagado y el precio que habría prevalecido sin la colusión es el sobreprecio, y constituye la forma más clásica ---y también la más litigada--- del daño antitrust.
+
+La razón es evidente. En muchas infracciones del artículo 101 TFUE, y en particular en los cárteles de fijación de precios, el mecanismo de daño es inmediato: la coordinación ilícita eleva el precio por encima del nivel competitivo. A partir de ahí, toda la discusión pericial gira en torno a tres preguntas: cuánto más se pagó, durante cuánto tiempo y sobre qué volumen de compras.
+
+La aparente simplicidad de estas preguntas encierra, sin embargo, una dificultad metodológica notable. El precio competitivo no se observa. Lo que el perito ve es el precio cartelizado, no el precio *but-for*. Por eso, cuantificar el sobreprecio exige construir un contrafactual de precios: una estimación razonada del precio que habría prevalecido sin la conducta. Ese contrafactual puede derivarse de series históricas previas, de mercados comparables o de modelos econométricos que controlen por los factores normales de formación de precios.
+
+En este capítulo me centraré en la lógica específica del sobreprecio como categoría de daño. El objetivo no es repetir los fundamentos ya expuestos en los capítulos anteriores, sino mostrar cómo se traslada esa lógica general a un problema muy concreto: estimar el precio competitivo, traducir la brecha en una tasa de sobreprecio y, a partir de ahí, monetizar el perjuicio.
+
+
+## La intuición: cuánto más se pagó por culpa del cártel
+
+El punto de partida del análisis es conceptualmente simple. Durante el período de cártel, el comprador paga un precio observado $P^{obs}$. Si no hubiera existido la colusión, habría pagado un precio competitivo $P^{0}$. El sobreprecio unitario es la diferencia entre ambos:
+
+$$
+\text{Sobreprecio unitario} = P^{obs} - P^{0}
+$$
+
+La tasa de sobreprecio expresa esa brecha en términos porcentuales:
+
+$$
+\text{Tasa de sobreprecio} = \frac{P^{obs} - P^{0}}{P^{0}}
+$$
+
+Esta última magnitud es especialmente útil en litigación porque permite comparar casos, mercados y períodos con niveles de precios distintos. Decir que un comprador pagó 8 euros más por unidad puede ser informativo en un mercado concreto; decir que pagó un 14% por encima del precio competitivo permite entender inmediatamente la intensidad relativa del daño.
+
+```{r}
+#| label: fig-overcharge-intuicion
+#| fig-cap: "Precio observado y precio competitivo estimado. La brecha entre ambos durante el período cartelizado representa el sobreprecio"
+#| fig-width: 9
+#| fig-height: 5.5
+
+set.seed(808)
+
+fechas <- seq.Date(as.Date("2019-01-01"), by = "month", length.out = 54)
+firmas <- LETTERS[1:6]
+meses <- factor(format(fechas, "%m"))
+inicio_cartel <- as.Date("2021-01-01")
+fin_cartel <- as.Date("2022-12-01")
+
+df_over <- expand_grid(
+  fecha = fechas,
+  firma = firmas
+) |>
+  mutate(
+    t = match(fecha, unique(fecha)),
+    mes = factor(format(fecha, "%m")),
+    firma_id = match(firma, firmas),
+    coste = 70 + 0.45 * t + 4 * sin(2 * pi * t / 12) + 0.6 * firma_id + rnorm(n(), 0, 1.5),
+    demanda = 180 + 0.35 * t + 6 * cos(2 * pi * t / 12) + rnorm(n(), 0, 3),
+    cartel = if_else(fecha >= inicio_cartel & fecha <= fin_cartel, 1, 0),
+    firma_fe = c(-4, -2, 0, 1, 3, 5)[firma_id],
+    precio_competitivo = 25 + 0.62 * coste + 0.08 * demanda + firma_fe + rnorm(n(), 0, 1.3),
+    precio_observado = precio_competitivo * (1 + 0.17 * cartel) + rnorm(n(), 0, 0.9),
+    cantidad = round(pmax(40, 320 - 1.6 * precio_observado + 0.35 * demanda + rnorm(n(), 0, 8)), 0)
+  )
+
+df_plot_over <- df_over |>
+  group_by(fecha) |>
+  summarise(
+    precio_observado = mean(precio_observado),
+    precio_competitivo = mean(precio_competitivo),
+    .groups = "drop"
+  ) |>
+  pivot_longer(-fecha, names_to = "serie", values_to = "precio")
+
+ggplot(df_plot_over, aes(x = fecha, y = precio, color = serie)) +
+  annotate("rect",
+           xmin = inicio_cartel, xmax = fin_cartel,
+           ymin = -Inf, ymax = Inf,
+           fill = "#e74c3c", alpha = 0.06) +
+  geom_line(linewidth = 0.95) +
+  geom_vline(xintercept = inicio_cartel, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = fin_cartel, color = "grey50", linetype = "dashed") +
+  scale_color_manual(values = c("precio_observado" = "#e74c3c",
+                                "precio_competitivo" = "#2c3e50"),
+                     labels = c("Precio observado", "Precio competitivo")) +
+  labs(x = NULL, y = "Precio medio", color = NULL) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank())
+```
+
+La @fig-overcharge-intuicion muestra exactamente esa lógica. Durante el período cartelizado, el precio observado se sitúa sistemáticamente por encima del precio competitivo. La distancia entre ambas líneas no es todavía el daño monetario total; es el sobreprecio unitario. Para convertirlo en daño indemnizable será necesario multiplicarlo por las cantidades efectivamente adquiridas y, en su caso, analizar el efecto volumen y el *passing-on*.
+
+
+## Del sobreprecio unitario al daño monetario
+
+Uno de los errores más frecuentes en los informes periciales de cárteles consiste en confundir estas dos magnitudes. El sobreprecio unitario es una brecha de precios. El daño monetario directo es esa brecha aplicada al volumen efectivamente comprado durante el período afectado:
+
+$$
+D^{directo} = \sum_{t \in \text{cartel}} (P_t^{obs} - P_t^{0}) Q_t^{obs}
+$$
+
+donde $Q_t^{obs}$ es la cantidad realmente adquirida. Esta es la formulación estándar del daño directo del comprador.
+
+Ahora bien, esta no agota necesariamente el daño económico total. Si el aumento del precio redujo las cantidades adquiridas, existe además un efecto volumen. Desde el punto de vista del comprador, ese efecto puede representar compras que dejaron de realizarse, pérdidas de margen aguas abajo o destrucción de excedente. En este manual lo separo analíticamente del sobreprecio directo para no mezclar categorías que conviene distinguir, tanto económica como jurídicamente. El capítulo 9 abordará después el *passing-on*, es decir, en qué medida ese sobreprecio se trasladó a lo largo de la cadena.
+
+```{r}
+#| label: fig-overcharge-dano
+#| fig-cap: "Daño monetario mensual estimado: la brecha de precios convertida en euros mediante las cantidades efectivamente adquiridas"
+#| fig-width: 9
+#| fig-height: 4.8
+
+modelo_log <- lm(
+  log(precio_observado) ~ cartel + log(coste) + log(demanda) + factor(firma) + factor(mes),
+  data = df_over
+)
+
+beta_cartel <- unname(coef(modelo_log)["cartel"])
+overcharge_pct <- exp(beta_cartel) - 1
+
+df_over <- df_over |>
+  mutate(
+    precio_competitivo_hat = if_else(cartel == 1, precio_observado / (1 + overcharge_pct), precio_observado),
+    sobreprecio_unitario = if_else(cartel == 1, precio_observado - precio_competitivo_hat, 0),
+    dano_directo = sobreprecio_unitario * cantidad
+  )
+
+df_dano_mensual <- df_over |>
+  filter(cartel == 1) |>
+  group_by(fecha) |>
+  summarise(dano = sum(dano_directo), .groups = "drop")
+
+ggplot(df_dano_mensual, aes(x = fecha, y = dano)) +
+  geom_col(fill = "#c0392b", alpha = 0.85) +
+  labs(x = NULL, y = "Daño directo mensual") +
+  theme_minimal(base_size = 13) +
+  theme(panel.grid.minor = element_blank())
+```
+
+La @fig-overcharge-dano traduce la brecha porcentual en dinero. Este paso es el que interesa finalmente al tribunal. El perito puede explicar que la estimación del sobreprecio responde a un modelo econométrico, pero lo que el juez necesita valorar es la cuantificación monetaria del perjuicio. La pedagogía del informe consiste precisamente en conectar ambas dimensiones sin confundirlas.
+
+
+## La idea econométrica: identificar el precio competitivo
+
+La econometría del sobreprecio puede adoptar distintas formas, pero en la práctica antitrust una de las especificaciones más habituales es la regresión log-lineal de precios. Su atractivo reside en que el coeficiente asociado a la variable indicadora del período cartelizado puede interpretarse, con la corrección adecuada, como una tasa porcentual de sobreprecio.
+
+Una formulación típica es la siguiente:
+
+$$
+\log(P_{it}) = \alpha + \beta \,\mathrm{Cartel}_t + \gamma_1 \log(Coste_{it}) + \gamma_2 \log(Demanda_{it}) + \mu_i + \tau_t + \varepsilon_{it}
+$$
+
+donde $P_{it}$ es el precio observado para la unidad $i$ en el período $t$, $\mathrm{Cartel}_t$ identifica el período de colusión, $Coste_{it}$ y $Demanda_{it}$ capturan determinantes normales de la formación de precios, y $\mu_i$ y $\tau_t$ representan heterogeneidad fija por unidad y por tiempo.
+
+El parámetro clave es $\beta$. En una especificación log-lineal, el sobreprecio porcentual se aproxima por:
+
+$$
+\widehat{\text{Sobreprecio}} = e^{\widehat{\beta}} - 1
+$$
+
+Esta transformación importa. Tratar $\widehat{\beta}$ directamente como porcentaje es una aproximación razonable solo cuando el coeficiente es pequeño. En cárteles con efectos más intensos, la corrección exponencial deja de ser un refinamiento y pasa a ser una necesidad.
+
+```{r}
+#| label: tbl-overcharge-reg
+#| tbl-cap: "Estimación econométrica de la tasa de sobreprecio"
+
+se_beta <- sqrt(vcov(modelo_log)["cartel", "cartel"])
+
+tabla_over <- tibble(
+  Parámetro = "Cartel",
+  Coeficiente = round(beta_cartel, 4),
+  `Sobreprecio estimado` = paste0(round(100 * overcharge_pct, 2), "%"),
+  `IC 95% inferior` = paste0(round(100 * (exp(beta_cartel - 1.96 * se_beta) - 1), 2), "%"),
+  `IC 95% superior` = paste0(round(100 * (exp(beta_cartel + 1.96 * se_beta) - 1), 2), "%")
+)
+
+tabla_over |>
+  knitr::kable(format = "pipe",
+               align = c("l", "r", "r", "r", "r"))
+```
+
+La @tbl-overcharge-reg resume la estimación central del modelo. El resultado importante no es solo que el coeficiente de cartel sea positivo y significativo, sino que su traducción económica se exprese en términos comprensibles: cuánto más se pagó, en porcentaje, por efecto de la colusión.
+
+
+## Implementación en R: de la tasa al daño total
+
+Una vez estimada la tasa de sobreprecio, el siguiente paso consiste en convertirla en precio competitivo contrafactual y, desde ahí, en daño monetario. En este ejemplo, utilizo una simplificación útil para fines pedagógicos: supongo que la tasa de sobreprecio es proporcional y relativamente estable durante el período cartelizado, de modo que el precio competitivo puede recuperarse dividiendo el precio observado por $1 + \widehat{\text{Sobreprecio}}$.
+
+```{r}
+#| label: code-overcharge-r
+#| echo: true
+#| eval: false
+
+# Modelo log-lineal con controles y efectos fijos
+fit_overcharge <- lm(
+  log(precio_observado) ~ cartel + log(coste) + log(demanda) +
+    factor(firma) + factor(mes),
+  data = datos
+)
+
+# Tasa de sobreprecio
+beta <- coef(fit_overcharge)["cartel"]
+tasa_sobreprecio <- exp(beta) - 1
+
+# Precio competitivo contrafactual
+datos <- datos |>
+  mutate(
+    precio_competitivo = if_else(cartel == 1,
+                                 precio_observado / (1 + tasa_sobreprecio),
+                                 precio_observado),
+    sobreprecio_unitario = precio_observado - precio_competitivo,
+    dano_directo = sobreprecio_unitario * cantidad
+  )
+```
+
+Esta implementación tiene una gran virtud expositiva: permite separar con claridad el problema econométrico del problema monetario. Primero se estima la tasa de sobreprecio. Después se reconstruye el precio competitivo. Finalmente se multiplica por la cantidad. Este encadenamiento lógico resulta especialmente útil en el informe pericial porque permite al lector seguir el hilo completo desde el modelo hasta la cifra final.
+
+```{r}
+#| label: tbl-overcharge-dano
+#| tbl-cap: "Cuantificación del daño directo por sobreprecio"
+
+resumen_dano_over <- df_over |>
+  filter(cartel == 1) |>
+  summarise(
+    `Meses cartelizados` = n_distinct(fecha),
+    `Precio observado medio` = round(mean(precio_observado), 2),
+    `Precio competitivo medio` = round(mean(precio_competitivo_hat), 2),
+    `Sobreprecio unitario medio` = round(mean(sobreprecio_unitario), 2),
+    `Daño directo total` = round(sum(dano_directo), 2)
+  )
+
+resumen_dano_over |>
+  knitr::kable(format = "pipe",
+               align = c("r", "r", "r", "r", "r"))
+```
+
+La @tbl-overcharge-dano conecta ya directamente con la indemnización. Muestra el precio observado, el precio competitivo estimado, la brecha media y el daño total acumulado durante el cártel. En una reclamación judicial, esta tabla condensa el núcleo económico del perjuicio directo.
+
+
+## Relevancia jurídica del método
+
+El sobreprecio ocupa un lugar central en la litigación de cárteles no solo por razones económicas, sino también normativas. El artículo 17.2 de la Directiva 2014/104/UE establece una presunción de que los cárteles causan un perjuicio. Esa presunción no exonera al perito de cuantificar el daño, pero sí refuerza jurídicamente la plausibilidad del mecanismo causal: el debate deja de girar en torno a si hubo daño y se desplaza a cuánto fue ese daño.
+
+Además, la jurisprudencia del TJUE ha ampliado el alcance de la reparación. En *Kone* [@kone2014], el Tribunal reconoció que el daño por precios inflados puede afectar incluso a compradores que no adquirieron directamente a empresas cartelizadas, sino a terceros que elevaron sus propios precios al amparo del entorno creado por el cártel. Esta idea del *umbrella effect* muestra que el sobreprecio no es solo una cuestión de relaciones contractuales directas, sino de distorsión general del proceso competitivo.
+
+En la práctica pericial, esto significa que la estimación del sobreprecio no solo debe ser técnicamente consistente, sino jurídicamente inteligible. El perito debe poder explicar qué parte del daño corresponde al comprador directo, cuál puede haber sido repercutida y qué porción adicional puede derivarse de efectos indirectos. Por eso este capítulo se centra en la estimación del sobreprecio como tal, mientras que el siguiente aborda el *passing-on*.
+
+
+## Sensibilidad: cuánto cambia el sobreprecio cuando cambia el modelo
+
+Una cuantificación robusta del sobreprecio exige examinar en qué medida el resultado depende de la especificación elegida. La práctica pericial muestra que pequeñas decisiones de modelización ---incluir o no controles de costes, usar efectos fijos, acotar de un modo u otro el período de cártel--- pueden alterar la estimación de forma no trivial.
+
+```{r}
+#| label: tbl-overcharge-sensibilidad
+#| tbl-cap: "Análisis de sensibilidad de la tasa de sobreprecio"
+
+estimar_overcharge <- function(formula, data) {
+  fit <- lm(formula, data = data)
+  beta <- unname(coef(fit)["cartel"])
+  tibble(`Sobreprecio estimado` = round(100 * (exp(beta) - 1), 2))
+}
+
+df_alt <- df_over |>
+  mutate(
+    cartel_alt = if_else(fecha >= as.Date("2021-03-01") & fecha <= as.Date("2022-10-01"), 1, 0)
+  )
+
+fit_alt <- lm(
+  log(precio_observado) ~ cartel_alt + log(coste) + log(demanda) + factor(firma) + factor(mes),
+  data = df_alt
+)
+
+sens_over <- bind_rows(
+  estimar_overcharge(log(precio_observado) ~ cartel, df_over) |>
+    mutate(`Especificación` = "Solo indicador de cartel"),
+  estimar_overcharge(log(precio_observado) ~ cartel + log(coste) + log(demanda), df_over) |>
+    mutate(`Especificación` = "Con controles de coste y demanda"),
+  estimar_overcharge(log(precio_observado) ~ cartel + log(coste) + log(demanda) + factor(firma) + factor(mes), df_over) |>
+    mutate(`Especificación` = "Con controles y efectos fijos"),
+  tibble(`Sobreprecio estimado` = round(100 * (exp(unname(coef(fit_alt)["cartel_alt"])) - 1), 2),
+         `Especificación` = "Ventana de cártel alternativa")
+) |>
+  select(`Especificación`, `Sobreprecio estimado`)
+
+sens_over |>
+  knitr::kable(format = "pipe",
+               align = c("l", "r"))
+```
+
+La @tbl-overcharge-sensibilidad muestra precisamente el tipo de análisis que un tribunal debería esperar ver en un buen informe pericial. Si la estimación del sobreprecio se mantiene en un rango razonable bajo distintas especificaciones, el método gana en credibilidad. Si oscila violentamente, el perito debe explicarlo y, en su caso, justificar por qué considera preferible una especificación concreta.
+
+
+## Errores frecuentes en la estimación del sobreprecio
+
+El error más frecuente es confundir sobreprecio con margen. El sobreprecio mide cuánto se elevó el precio respecto del contrafactual competitivo; el margen mide la diferencia entre precio y coste. Ambos conceptos pueden estar relacionados, pero no son intercambiables. Un informe que trate el margen empresarial como si fuera sinónimo de sobreprecio comete un error conceptual grave.
+
+El segundo error consiste en comparar precios que no son homogéneos. En los expedientes de cártel es habitual que existan diferencias de calidad, condiciones de entrega, descuentos, tamaños de pedido o composición del producto. Si el perito compara precios medios sin controlar esas heterogeneidades, la estimación del sobreprecio puede quedar sesgada de forma sustancial.
+
+Un tercer error es trabajar con precios de lista cuando el mercado real opera con descuentos individualizados. En muchos sectores, el precio económicamente relevante no es el publicado, sino el precio efectivo de transacción. Esta distinción puede ser determinante.
+
+El cuarto error es identificar correctamente la tasa de sobreprecio pero monetizar mal el daño. Esto ocurre cuando se utilizan cantidades teóricas en lugar de cantidades observadas, cuando no se delimita bien el período cartelizado o cuando se omite que parte del sobreprecio pudo haberse repercutido aguas abajo.
+
+Por último, existe un error estratégico muy común: presentar la estimación del sobreprecio como si fuera una cifra autosuficiente, sin explicar de dónde sale el precio competitivo. Pero toda la discusión pericial gira precisamente en torno a ese contrafactual. Si el perito no logra hacer comprensible cómo lo ha construido, la cifra pierde buena parte de su fuerza probatoria.
+
+
+## Lo que un tribunal debe retener de este método
+
+Si hubiera que condensar este capítulo en una sola idea útil para un tribunal, sería esta: el sobreprecio no es simplemente un precio alto, sino un precio más alto de lo que habría prevalecido en condiciones competitivas.
+
+Esa precisión importa porque desplaza la atención del nivel observado a la comparación contrafactual. El trabajo del perito no consiste en mostrar que el precio subió, sino en demostrar que subió más de lo que habría subido sin la conducta. Cuando ese contrafactual está bien construido y la monetización del daño se hace de forma rigurosa, la estimación del sobreprecio se convierte en una de las piezas más sólidas y comprensibles de la cuantificación antitrust.

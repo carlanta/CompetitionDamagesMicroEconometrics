@@ -1,0 +1,33 @@
+
+```{=latex}
+\frontmatter
+```
+
+```{r}
+#| include: false
+library(tidyverse)
+library(kableExtra)
+```
+
+# Prólogo {.unnumbered}
+
+Este manual nace de la práctica profesional. Tras años emitiendo informes periciales en procedimientos judiciales y arbitrales sobre competencia desleal y prácticas anticompetitivas, he constatado una carencia persistente: no existe, en lengua española, un texto que explique de forma rigurosa pero accesible cómo se cuantifican los daños económicos derivados de estas conductas.
+
+Los manuales de referencia internacional y las guías institucionales de la Comisión Europea proporcionan un marco valioso, pero suelen estar escritos para economistas especializados. Los abogados que litigan estos casos necesitan entender qué hace el perito, por qué lo hace y qué significa el resultado sin necesidad de dominar toda la econometría subyacente. Los jueces y árbitros, por su parte, necesitan evaluar la solidez de un informe pericial sin tener que convertirse en estadísticos.
+
+Este libro intenta cubrir esa brecha. Cada capítulo metodológico se estructura en tres capas: primero, una explicación intuitiva sin fórmulas; segundo, la formulación econométrica completa; tercero, la implementación en R con datos simulados, para que el lector pueda reproducir los análisis paso a paso.
+
+No se trata solo de un manual de técnicas. Un buen informe pericial de daños exige construir un escenario contrafactual creíble, demostrar la causalidad entre la conducta y el perjuicio, aislar el efecto de la infracción de otros factores concurrentes y someter el resultado a análisis de sensibilidad rigurosos. Cada una de estas exigencias recorre el libro entero.
+
+Si este manual consigue que un abogado entienda mejor lo que hay detrás de una cifra de daño, que un juez pueda valorar con más criterio la solidez de un informe pericial, o que un economista joven disponga de una guía útil para iniciarse en este campo, habrá cumplido su propósito.
+
+```{=latex}
+\vspace{1cm}
+\begin{flushright}
+\textit{Carlos de Anta Puig}\\
+\textit{Madrid, marzo de 2026}
+\end{flushright}
+\cleardoublepage
+\pagestyle{plain}
+\mainmatter
+```

@@ -4,8 +4,10 @@
 .Ruserdata
 /.quarto/
 _build/
-docs/
 GitHubToken
 *.log
 _book/
 backup/
+output/
+_freeze/
+.nojekyll

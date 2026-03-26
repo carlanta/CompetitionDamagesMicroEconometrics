@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Causalidad, atribución y concurrencia de causas – Cuantificación de Daños Antitrust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-datos-evidencia.html" rel="next">
+<link href="./02-conductas.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-causalidad.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Causalidad, atribución y concurrencia de causas</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Cuantificación de Daños Antitrust</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/carlanta/CompetitionDamagesMicroEconometrics" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prólogo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduccion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a la cuantificación de daños económicos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-conductas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conductas ilícitas y su impacto económico</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-causalidad.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Causalidad, atribución y concurrencia de causas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-datos-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datos y evidencia para la cuantificación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-before-after.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Método antes-y-después (<em>Before-and-After</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-comparables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Método de comparables (<em>Yardstick</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-did.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Diferencias en diferencias (DID)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-sobreprecio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimación del sobreprecio (<em>Overcharge</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-passing-on.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">El <em>passing-on</em> y la cadena de distribución</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-lucro-cesante.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Estimación del lucro cesante (<em>Lost Profits</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-analisis-financiero.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Análisis financiero-contable del daño</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-endogeneidad-iv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Endogeneidad y variables instrumentales</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-panel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos de panel y efectos fijos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-control-sintetico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Control sintético</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-regresion-cuantilica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Regresión cuantílica y efectos heterogéneos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-intereses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Actualización financiera y cálculo de intereses</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-sensibilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Análisis de sensibilidad y robustez</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-errores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Errores frecuentes en informes periciales de daños</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-informe-pericial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Redacción y defensa del informe pericial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bibliografía</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#el-nexo-causal-como-exigencia-ineludible" id="toc-el-nexo-causal-como-exigencia-ineludible" class="nav-link active" data-scroll-target="#el-nexo-causal-como-exigencia-ineludible"><span class="header-section-number">3.1</span> El nexo causal como exigencia ineludible</a></li>
+  <li><a href="#correlación-y-causalidad-una-distinción-que-salva-informes" id="toc-correlación-y-causalidad-una-distinción-que-salva-informes" class="nav-link" data-scroll-target="#correlación-y-causalidad-una-distinción-que-salva-informes"><span class="header-section-number">3.2</span> Correlación y causalidad: una distinción que salva informes</a></li>
+  <li><a href="#estrategias-de-identificación-causal" id="toc-estrategias-de-identificación-causal" class="nav-link" data-scroll-target="#estrategias-de-identificación-causal"><span class="header-section-number">3.3</span> Estrategias de identificación causal</a>
+  <ul class="collapse">
+  <li><a href="#el-enfoque-antes-y-después" id="toc-el-enfoque-antes-y-después" class="nav-link" data-scroll-target="#el-enfoque-antes-y-después"><span class="header-section-number">3.3.1</span> El enfoque antes-y-después</a></li>
+  <li><a href="#el-enfoque-de-comparables" id="toc-el-enfoque-de-comparables" class="nav-link" data-scroll-target="#el-enfoque-de-comparables"><span class="header-section-number">3.3.2</span> El enfoque de comparables</a></li>
+  <li><a href="#diferencias-en-diferencias" id="toc-diferencias-en-diferencias" class="nav-link" data-scroll-target="#diferencias-en-diferencias"><span class="header-section-number">3.3.3</span> Diferencias en diferencias</a></li>
+  <li><a href="#tests-de-falsificación-y-placebos" id="toc-tests-de-falsificación-y-placebos" class="nav-link" data-scroll-target="#tests-de-falsificación-y-placebos"><span class="header-section-number">3.3.4</span> Tests de falsificación y placebos</a></li>
+  </ul></li>
+  <li><a href="#la-atribución-del-daño-aislar-el-efecto-de-la-infracción" id="toc-la-atribución-del-daño-aislar-el-efecto-de-la-infracción" class="nav-link" data-scroll-target="#la-atribución-del-daño-aislar-el-efecto-de-la-infracción"><span class="header-section-number">3.4</span> La atribución del daño: aislar el efecto de la infracción</a></li>
+  <li><a href="#concurrencia-de-causas-y-responsabilidad" id="toc-concurrencia-de-causas-y-responsabilidad" class="nav-link" data-scroll-target="#concurrencia-de-causas-y-responsabilidad"><span class="header-section-number">3.5</span> Concurrencia de causas y responsabilidad</a></li>
+  <li><a href="#el-deber-de-mitigación-y-sus-implicaciones" id="toc-el-deber-de-mitigación-y-sus-implicaciones" class="nav-link" data-scroll-target="#el-deber-de-mitigación-y-sus-implicaciones"><span class="header-section-number">3.6</span> El deber de mitigación y sus implicaciones</a></li>
+  <li><a href="#herramientas-econométricas-para-la-inferencia-causal" id="toc-herramientas-econométricas-para-la-inferencia-causal" class="nav-link" data-scroll-target="#herramientas-econométricas-para-la-inferencia-causal"><span class="header-section-number">3.7</span> Herramientas econométricas para la inferencia causal</a></li>
+  <li><a href="#la-causalidad-ante-el-tribunal" id="toc-la-causalidad-ante-el-tribunal" class="nav-link" data-scroll-target="#la-causalidad-ante-el-tribunal"><span class="header-section-number">3.8</span> La causalidad ante el tribunal</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/carlanta/CompetitionDamagesMicroEconometrics/blob/main/03-causalidad.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="causalidad" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Causalidad, atribución y concurrencia de causas</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="el-nexo-causal-como-exigencia-ineludible" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="el-nexo-causal-como-exigencia-ineludible"><span class="header-section-number">3.1</span> El nexo causal como exigencia ineludible</h2>
+<p>Cuantificar un daño sin demostrar que la conducta ilícita lo causó es un ejercicio inútil desde el punto de vista procesal. Por muy sofisticado que sea el modelo econométrico, por muy precisa que resulte la estimación del perjuicio, si el perito no logra establecer un nexo causal convincente entre la infracción y el daño reclamado, la cuantificación carece de fundamento. El tribunal desestimará la reclamación o, en el mejor de los casos, otorgará una indemnización simbólica que no guarda relación con el daño real.</p>
+<p>Esta exigencia, que en el plano jurídico se traduce en la necesidad de acreditar el nexo de causalidad, tiene un correlato técnico que el perito debe abordar con el mismo rigor con el que formula sus modelos: la demostración empírica de que la variación observada en la variable de resultado —precios, ventas, beneficios, cuotas de mercado— es atribuible a la conducta ilícita y no a otros factores que podrían haber producido el mismo efecto.</p>
+<p>A lo largo de mi carrera profesional, he constatado que la causalidad es, con diferencia, el campo de batalla donde se ganan y se pierden más procedimientos de daños. He visto casos en los que una estimación de sobreprecio técnicamente impecable fue descartada porque la contraparte demostró que la subida de precios obedecía a un incremento de costes de materias primas, no al cártel. He visto otros en los que una caída de ventas atribuida a la denigración de un competidor resultó ser, en realidad, consecuencia de la entrada de un nuevo operador en el mercado. La causalidad no es un trámite formal: es la columna vertebral del informe pericial.</p>
+</section>
+<section id="correlación-y-causalidad-una-distinción-que-salva-informes" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="correlación-y-causalidad-una-distinción-que-salva-informes"><span class="header-section-number">3.2</span> Correlación y causalidad: una distinción que salva informes</h2>
+<p>Toda la econometría aplicada a la cuantificación de daños descansa sobre una distinción elemental pero frecuentemente ignorada: la diferencia entre correlación y causalidad. Que dos variables se muevan juntas no implica que una cause a la otra. Que las ventas de una empresa cayeran durante el período de la conducta ilícita no demuestra, por sí solo, que la conducta causó la caída: pueden existir decenas de factores alternativos que expliquen la misma evolución.</p>
+<p>El riesgo de confundir correlación con causalidad es especialmente agudo cuando el perito trabaja con datos observacionales —que es la situación habitual en los procedimientos de daños, donde no es posible realizar experimentos controlados. En un ensayo clínico, el investigador puede asignar aleatoriamente a los sujetos a un grupo de tratamiento y a un grupo de control, de modo que cualquier diferencia entre ambos grupos sea atribuible al tratamiento. En un procedimiento de daños, esa aleatorización no existe: la conducta ilícita afectó a determinadas empresas, mercados o períodos, y no a otros, por razones que no son aleatorias sino que obedecen a la lógica económica de la infracción.</p>
+<p>La tarea del perito consiste, entonces, en construir un diseño empírico que se aproxime, en la mayor medida posible, a la lógica de un experimento controlado. Los métodos econométricos que se desarrollan en la Parte II de este manual —antes-y-después, comparables, diferencias en diferencias, control sintético— son, en esencia, estrategias de identificación causal: formas de aislar el efecto de la conducta ilícita de los demás factores que podrían explicar la variación observada.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">48</span>  <span class="co"># 4 años mensuales</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>t_conducta <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>t_recesion <span class="ot">&lt;-</span> <span class="dv">18</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Componentes</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>tendencia <span class="ot">&lt;-</span> <span class="dv">150</span> <span class="sc">+</span> <span class="fl">1.2</span> <span class="sc">*</span> t</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>estacionalidad <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">*</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> t <span class="sc">/</span> <span class="dv">12</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>ruido <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Efecto recesión (comienza en t=18, se intensifica)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>efecto_recesion <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>efecto_recesion[t_recesion<span class="sc">:</span>n] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">12</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.08</span> <span class="sc">*</span> (t_recesion<span class="sc">:</span>n <span class="sc">-</span> t_recesion <span class="sc">+</span> <span class="dv">1</span>)))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Efecto conducta ilícita (comienza en t=20)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>efecto_conducta <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>efecto_conducta[t_conducta<span class="sc">:</span>n] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">8</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Series</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>ventas_real <span class="ot">&lt;-</span> tendencia <span class="sc">+</span> estacionalidad <span class="sc">+</span> efecto_recesion <span class="sc">+</span> efecto_conducta <span class="sc">+</span> ruido</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>ventas_sin_nada <span class="ot">&lt;-</span> tendencia <span class="sc">+</span> estacionalidad <span class="sc">+</span> ruido</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>ventas_solo_recesion <span class="ot">&lt;-</span> tendencia <span class="sc">+</span> estacionalidad <span class="sc">+</span> efecto_recesion <span class="sc">+</span> ruido</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>df_causal <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">mes =</span> t,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Observado (recesion + conducta)</span><span class="st">`</span> <span class="ot">=</span> ventas_real,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Contrafactual (sin nada)</span><span class="st">`</span> <span class="ot">=</span> ventas_sin_nada,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Solo efecto recesion</span><span class="st">`</span> <span class="ot">=</span> ventas_solo_recesion</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>mes, <span class="at">names_to =</span> <span class="st">"serie"</span>, <span class="at">values_to =</span> <span class="st">"ventas"</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_causal, <span class="fu">aes</span>(<span class="at">x =</span> mes, <span class="at">y =</span> ventas, <span class="at">color =</span> serie, <span class="at">linetype =</span> serie)) <span class="sc">+</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> t_conducta, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> t_recesion, <span class="at">linetype =</span> <span class="st">"dotted"</span>, <span class="at">color =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> t_conducta <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fu">max</span>(ventas_sin_nada) <span class="sc">+</span> <span class="dv">5</span>,</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Inicio conducta"</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> t_recesion <span class="sc">-</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fu">max</span>(ventas_sin_nada) <span class="sc">+</span> <span class="dv">9</span>,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Inicio recesion"</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="dv">38</span>, <span class="at">xend =</span> <span class="dv">38</span>,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> ventas_solo_recesion[<span class="dv">38</span>] <span class="sc">+</span> ruido[<span class="dv">38</span>],</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>           <span class="at">yend =</span> ventas_real[<span class="dv">38</span>],</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#e74c3c"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>,</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>           <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">ends =</span> <span class="st">"both"</span>, <span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"inches"</span>))) <span class="sc">+</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">39</span>, <span class="at">y =</span> <span class="fu">mean</span>(<span class="fu">c</span>(ventas_solo_recesion[<span class="dv">38</span>], ventas_real[<span class="dv">38</span>])),</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Dano real"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">color =</span> <span class="st">"#c0392b"</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Observado (recesion + conducta)"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>,</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Contrafactual (sin nada)"</span> <span class="ot">=</span> <span class="st">"#2c3e50"</span>,</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Solo efecto recesion"</span> <span class="ot">=</span> <span class="st">"#3498db"</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Observado (recesion + conducta)"</span> <span class="ot">=</span> <span class="st">"solid"</span>,</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Contrafactual (sin nada)"</span> <span class="ot">=</span> <span class="st">"dashed"</span>,</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Solo efecto recesion"</span> <span class="ot">=</span> <span class="st">"dotdash"</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mes"</span>, <span class="at">y =</span> <span class="st">"Ventas (miles)"</span>, <span class="at">color =</span> <span class="cn">NULL</span>, <span class="at">linetype =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-correlacion-causalidad" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-correlacion-causalidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-causalidad_files/figure-html/fig-correlacion-causalidad-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-correlacion-causalidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Ejemplo de correlación espuria: las ventas caen al mismo tiempo que la conducta ilícita, pero también coincide con una recesión económica. Sin un análisis causal riguroso, el perito podría atribuir erróneamente toda la caída a la infracción.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>La <a href="#fig-correlacion-causalidad" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> ilustra un escenario que he encontrado repetidamente en la práctica. Las ventas de la empresa afectada caen a partir del mes 20, que coincide con el inicio de la conducta ilícita. Sin embargo, una recesión económica había comenzado dos meses antes, en el mes 18, y ya estaba provocando una reducción de ventas por sí sola. La línea azul muestra la evolución que habrían tenido las ventas con la recesión pero sin la conducta ilícita. El daño realmente atribuible a la infracción no es la brecha total entre lo observado y el contrafactual sin ningún factor adverso (línea discontinua), sino únicamente la diferencia entre lo observado y lo que habría ocurrido considerando la recesión pero no la conducta.</p>
+<p>Un perito que atribuyera toda la caída de ventas a la conducta ilícita estaría sobreestimando el daño de forma sustancial. La contraparte, en su informe, señalaría —con razón— que parte de la caída obedece a la recesión, y el tribunal se encontraría ante dos cuantificaciones radicalmente distintas sin herramientas para discernir cuál es correcta. Este problema de atribución es, precisamente, lo que los métodos econométricos de identificación causal están diseñados para resolver.</p>
+</section>
+<section id="estrategias-de-identificación-causal" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="estrategias-de-identificación-causal"><span class="header-section-number">3.3</span> Estrategias de identificación causal</h2>
+<p>La econometría moderna ofrece un repertorio de estrategias para abordar el problema de la causalidad en contextos observacionales. Cada una de ellas impone supuestos diferentes y resulta apropiada para circunstancias distintas. El perito debe seleccionar la estrategia que mejor se adapte a los datos disponibles y a las características del caso, siendo transparente respecto a los supuestos que asume y a las limitaciones que implican.</p>
+<section id="el-enfoque-antes-y-después" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="el-enfoque-antes-y-después"><span class="header-section-number">3.3.1</span> El enfoque antes-y-después</h3>
+<p>La estrategia más intuitiva consiste en comparar la variable de interés antes y después de la conducta ilícita. Si las ventas eran estables antes de la infracción y cayeron bruscamente tras su inicio, es razonable atribuir la caída a la conducta. El supuesto causal implícito es que, en ausencia de la infracción, la variable habría continuado su trayectoria previa.</p>
+<p>Este supuesto es plausible cuando no existen otros factores que hayan cambiado simultáneamente. Pero cuando, como en el ejemplo anterior, coinciden en el tiempo la conducta ilícita y otros shocks —una recesión, un cambio regulatorio, la entrada de un nuevo competidor—, el enfoque antes-y-después puro resulta insuficiente. El perito debe entonces incorporar variables de control que capturen el efecto de esos factores concurrentes, o recurrir a estrategias de identificación más sofisticadas.</p>
+</section>
+<section id="el-enfoque-de-comparables" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="el-enfoque-de-comparables"><span class="header-section-number">3.3.2</span> El enfoque de comparables</h3>
+<p>Una alternativa consiste en comparar a la víctima con entidades similares que no fueron afectadas por la conducta. Si la empresa dañada perdió un 15% de sus ventas durante el período infractor, pero empresas comparables en mercados no afectados también perdieron un 8% (debido, por ejemplo, a la recesión), el daño atribuible a la conducta se estima en un 7%. El supuesto causal es que la evolución del grupo de comparación representa lo que le habría ocurrido a la víctima en ausencia de la infracción.</p>
+<p>La credibilidad de este enfoque depende críticamente de la calidad de los comparables. Una empresa que opera en un mercado geográficamente distinto, con una estructura de costes diferente y una base de clientes heterogénea, puede no constituir un buen contrafactual para la víctima. La selección de comparables es, en sí misma, una decisión metodológica que debe estar fundamentada y que será objeto de escrutinio por la contraparte.</p>
+</section>
+<section id="diferencias-en-diferencias" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="diferencias-en-diferencias"><span class="header-section-number">3.3.3</span> Diferencias en diferencias</h3>
+<p>La combinación de ambos enfoques —temporal y de comparables— da lugar a la estrategia de diferencias en diferencias (DID), que compara la evolución de la víctima antes y después de la conducta con la evolución de un grupo de control no afectado durante el mismo período. El supuesto clave es que, en ausencia de la infracción, la víctima habría evolucionado de forma paralela al grupo de control: el supuesto de <em>tendencias paralelas</em>.</p>
+<p>Cuando este supuesto se sostiene —y existen tests empíricos para verificarlo, como se detalla en el Capítulo 7—, el estimador DID proporciona una estimación causal del efecto de la conducta que es robusta a la presencia de factores comunes que afecten por igual a ambos grupos (como una recesión general o un cambio regulatorio sectorial).</p>
+</section>
+<section id="tests-de-falsificación-y-placebos" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="tests-de-falsificación-y-placebos"><span class="header-section-number">3.3.4</span> Tests de falsificación y placebos</h3>
+<p>Un instrumento poderoso para reforzar la credibilidad de la estimación causal son los tests de falsificación o placebos. La lógica es sencilla: si el modelo identifica correctamente el efecto de la conducta, no debería encontrar ningún efecto cuando se aplica a períodos o grupos donde la conducta no existió. Si el perito estima un «efecto» significativo de la conducta en un período anterior a su inicio, o en un mercado donde la infracción no tuvo lugar, algo está mal en la identificación causal.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">77</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulamos un efecto real en t=0 y placebos en t=-8,-6,-4,-2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>placebo_t <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="sc">-</span><span class="dv">6</span>, <span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">0</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>efecto_real <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">15</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>efecto_estimado <span class="ot">&lt;-</span> efecto_real <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="fl">2.5</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.2</span>, <span class="fl">2.8</span>, <span class="fl">3.5</span>, <span class="fl">3.0</span>, <span class="fl">2.2</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>df_placebo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">periodo =</span> placebo_t,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">efecto =</span> efecto_estimado,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci_low =</span> efecto_estimado <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci_high =</span> efecto_estimado <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">tipo =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Placebo"</span>, <span class="dv">4</span>), <span class="st">"Real"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_placebo, <span class="fu">aes</span>(<span class="at">x =</span> periodo, <span class="at">y =</span> efecto, <span class="at">color =</span> tipo)) <span class="sc">+</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey60"</span>) <span class="sc">+</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ci_low, <span class="at">ymax =</span> ci_high), <span class="at">width =</span> <span class="fl">0.4</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Placebo"</span> <span class="ot">=</span> <span class="st">"#3498db"</span>, <span class="st">"Real"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>)) <span class="sc">+</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> placebo_t,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"t-8</span><span class="sc">\n</span><span class="st">(placebo)"</span>, <span class="st">"t-6</span><span class="sc">\n</span><span class="st">(placebo)"</span>, </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"t-4</span><span class="sc">\n</span><span class="st">(placebo)"</span>, <span class="st">"t-2</span><span class="sc">\n</span><span class="st">(placebo)"</span>, </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"t=0</span><span class="sc">\n</span><span class="st">(real)"</span>)) <span class="sc">+</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Efecto estimado sobre ventas"</span>, <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-placebo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-placebo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-causalidad_files/figure-html/fig-placebo-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-placebo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: Test de placebo temporal: se estima el efecto de la conducta en períodos ficticios anteriores a la infracción real. Si la identificación causal es correcta, no deberían aparecer efectos significativos en las fechas placebo.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>La <a href="#fig-placebo" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> muestra el resultado típico de un test de placebo temporal bien ejecutado. En los períodos anteriores a la infracción (marcados como placebo), el efecto estimado no es significativamente distinto de cero: los intervalos de confianza cruzan la línea horizontal. En el período real de la conducta (t=0), el efecto es negativo y estadísticamente significativo. Este patrón refuerza la credibilidad de la estimación causal: si el modelo detectara efectos espurios en los períodos placebo, habría razones fundadas para dudar de que el efecto estimado en el período real sea genuinamente atribuible a la conducta.</p>
+</section>
+</section>
+<section id="la-atribución-del-daño-aislar-el-efecto-de-la-infracción" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="la-atribución-del-daño-aislar-el-efecto-de-la-infracción"><span class="header-section-number">3.4</span> La atribución del daño: aislar el efecto de la infracción</h2>
+<p>Aun cuando se haya establecido que la conducta ilícita causó un daño, queda por resolver una cuestión igualmente importante: qué proporción del daño observado es atribuible a la infracción y qué proporción obedece a otros factores concurrentes. Este problema de atribución es, en la práctica, uno de los más controvertidos y el que genera mayor divergencia entre los informes periciales de las partes.</p>
+<p>Los factores que pueden concurrir con la conducta ilícita son múltiples y variados. El ciclo económico puede estar deprimiendo la demanda con independencia de la infracción. Un cambio regulatorio puede haber alterado las condiciones del mercado. La víctima puede haber tomado decisiones empresariales erróneas que habrían reducido sus beneficios incluso en ausencia de la conducta. Un nuevo competidor puede haber entrado en el mercado, erosionando las cuotas de todos los incumbentes. Un avance tecnológico puede haber dejado obsoleto el producto de la víctima.</p>
+<p>El perito debe identificar estos factores, evaluar su relevancia y, en la medida de lo posible, cuantificar su contribución a la variación observada. La econometría ofrece herramientas para esta tarea de descomposición: la inclusión de variables de control en los modelos de regresión, los modelos de series temporales con múltiples componentes, los tests de cambio estructural que permiten datar con precisión el momento en que se produjo cada ruptura, y los análisis de sensibilidad que evalúan cómo cambia la estimación del daño cuando se incluyen o excluyen determinados factores.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>componentes <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">factor =</span> <span class="fu">c</span>(<span class="st">"Conducta ilicita"</span>, <span class="st">"Recesion economica"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Entrada nuevo competidor"</span>, <span class="st">"Decisiones propias"</span>, <span class="st">"Residual"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">efecto =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">6</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">tipo =</span> <span class="fu">c</span>(<span class="st">"Indemnizable"</span>, <span class="st">"No atribuible"</span>, <span class="st">"No atribuible"</span>, <span class="st">"No atribuible"</span>, <span class="st">"No atribuible"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>componentes<span class="sc">$</span>factor <span class="ot">&lt;-</span> <span class="fu">fct_reorder</span>(componentes<span class="sc">$</span>factor, componentes<span class="sc">$</span>efecto)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(componentes, <span class="fu">aes</span>(<span class="at">x =</span> factor, <span class="at">y =</span> efecto, <span class="at">fill =</span> tipo)) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(efecto, <span class="st">"%"</span>)), </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="fl">1.2</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Indemnizable"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>, <span class="st">"No atribuible"</span> <span class="ot">=</span> <span class="st">"#95a5a6"</span>)) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Efecto sobre ventas (%)"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-descomposicion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-descomposicion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-causalidad_files/figure-html/fig-descomposicion-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-descomposicion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Descomposición de la caída total de ventas en sus componentes causales. Solo la fracción atribuible a la conducta ilícita constituye el daño indemnizable.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>La <a href="#fig-descomposicion" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> presenta un ejemplo estilizado pero representativo de lo que el perito debe hacer en cada caso. Las ventas de la víctima cayeron un 35% durante el período analizado. De esa caída total, un 15% es atribuible a la conducta ilícita, un 10% a la recesión económica, un 6% a la entrada de un nuevo competidor, un 3% a decisiones propias de la víctima y un 1% queda como residuo no explicado. Solo el 15% atribuible a la conducta constituye el daño indemnizable. Un perito que reclamara el 35% estaría inflando la cuantificación; un perito que no descompusiera los factores estaría exponiendo su informe a una impugnación fácil por la contraparte.</p>
+</section>
+<section id="concurrencia-de-causas-y-responsabilidad" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="concurrencia-de-causas-y-responsabilidad"><span class="header-section-number">3.5</span> Concurrencia de causas y responsabilidad</h2>
+<p>La concurrencia de causas plantea cuestiones que trascienden lo puramente econométrico y entran en el terreno jurídico. Cuando múltiples factores contribuyen al daño, ¿quién responde de qué parte? ¿Puede la víctima reclamar al infractor la totalidad del daño observado y dejar que sea él quien demuestre qué parte obedece a causas ajenas? ¿O debe la víctima aislar, desde el principio, la fracción del daño atribuible a la infracción?</p>
+<p>La Directiva 2014/104/UE no resuelve explícitamente esta cuestión, pero el principio de restitución íntegra, combinado con la prohibición de enriquecimiento injusto, impone un marco claro: la víctima tiene derecho a ser compensada por el daño causado por la infracción, ni más ni menos. Corresponde al perito cuantificar ese daño con la mayor precisión posible, aislando el efecto de la conducta de los demás factores concurrentes.</p>
+<p>En la práctica procesal, la carga de la prueba sobre la atribución varía según la jurisdicción y las circunstancias del caso. En algunos procedimientos, el tribunal acepta una estimación del daño total y aplica un descuento por factores concurrentes. En otros, exige que el perito demuestre la contribución causal de la infracción de forma separada. En cualquier caso, el perito que presenta una descomposición rigurosa de los factores que han contribuido al daño se encuentra en una posición mucho más sólida que el que se limita a estimar un efecto total sin distinguir sus componentes.</p>
+</section>
+<section id="el-deber-de-mitigación-y-sus-implicaciones" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="el-deber-de-mitigación-y-sus-implicaciones"><span class="header-section-number">3.6</span> El deber de mitigación y sus implicaciones</h2>
+<p>Un aspecto de la causalidad que merece atención específica es el deber de mitigación del daño. El principio general, reconocido en la mayoría de ordenamientos jurídicos, establece que la víctima tiene la obligación de adoptar medidas razonables para limitar el perjuicio sufrido. Si la víctima no mitiga el daño pudiendo hacerlo, la parte del perjuicio que habría podido evitarse no es indemnizable.</p>
+<p>Para el perito, el deber de mitigación tiene una implicación directa en la construcción del escenario contrafactual. El contrafactual no es simplemente «lo que habría ocurrido sin la infracción», sino «lo que habría ocurrido si la víctima hubiera actuado razonablemente para mitigar el daño, una vez conocida la infracción». Si la empresa afectada por un cártel podía haberse abastecido de proveedores alternativos a precios competitivos y no lo hizo, el sobreprecio que pagó por no cambiar de proveedor puede no ser enteramente indemnizable.</p>
+<p>La valoración de lo que constituye una mitigación «razonable» es, inevitablemente, una cuestión de juicio que combina elementos económicos y jurídicos. El perito puede contribuir evaluando si las alternativas de mitigación eran económicamente viables y en qué medida habrían reducido el daño. Pero la decisión final sobre qué grado de mitigación era exigible corresponde al tribunal.</p>
+</section>
+<section id="herramientas-econométricas-para-la-inferencia-causal" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="herramientas-econométricas-para-la-inferencia-causal"><span class="header-section-number">3.7</span> Herramientas econométricas para la inferencia causal</h2>
+<p>Sin pretender desarrollar aquí la formulación técnica completa —que corresponde a los capítulos de métodos—, conviene enumerar las principales herramientas que la econometría pone a disposición del perito para abordar los problemas de causalidad y atribución descritos en este capítulo.</p>
+<p>Los <strong>modelos de regresión con variables de control</strong> permiten aislar el efecto de la conducta incluyendo en el modelo los factores concurrentes como regresores adicionales. El coeficiente asociado a la variable indicadora de la infracción captura el efecto neto de la conducta, descontados los demás factores. La calidad de esta estimación depende críticamente de que se incluyan las variables de control relevantes y de que no existan factores omitidos correlacionados con la infracción.</p>
+<p>Los <strong>tests de causalidad de Granger</strong> evalúan si una variable contiene información predictiva sobre otra, más allá de la que proporciona el pasado de la propia variable. Aunque no constituyen una prueba de causalidad en sentido estricto, pueden ser útiles para evaluar la dirección temporal de las relaciones entre variables y descartar hipótesis de causalidad inversa.</p>
+<p>Los <strong>estudios de eventos</strong> (<em>event studies</em>) identifican el impacto de un acontecimiento específico —el inicio de la conducta, su revelación pública, la resolución sancionadora— sobre una variable de resultado, controlando la evolución esperada en ausencia del evento. Son especialmente útiles cuando el daño se manifiesta de forma abrupta en una fecha identificable.</p>
+<p>Las <strong>variables instrumentales</strong> abordan el problema de la endogeneidad: la situación en que la variable de interés está correlacionada con factores no observados que también afectan al resultado. Si el perito encuentra un instrumento válido —una variable que afecta a la conducta pero no al resultado por otra vía que no sea a través de la conducta—, puede obtener una estimación causal consistente. El Capítulo 12 desarrolla esta técnica en detalle.</p>
+<p>Los <strong>tests de cambio estructural</strong> —Chow, CUSUM, Bai-Perron— permiten datar con precisión el momento en que se produjo una ruptura en la serie temporal, lo que resulta esencial para delimitar el inicio y el fin del período de daño y para distinguir entre rupturas causadas por la infracción y rupturas causadas por otros factores.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Herramienta =</span> <span class="fu">c</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Regresión con controles"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Diferencias en diferencias"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Control sintético"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Variables instrumentales"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Test de Granger"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Estudio de eventos"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tests de cambio estructural"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tests de placebo / falsificación"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Problema que aborda</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Factores concurrentes observables"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Factores comunes no observados (con tend. paralelas)"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Contrafactual individual con pocas unidades"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Endogeneidad y variables omitidas"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Dirección temporal de la causalidad"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Impacto de eventos discretos"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Datación de rupturas causales"</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Validación de la identificación causal"</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Capítulo de referencia</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Caps. 5--6"</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cap. 7"</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cap. 14"</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cap. 12"</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cap. 5"</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cap. 5"</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cap. 5"</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Caps. 5, 7, 14"</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">escape =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"hold_position"</span>, <span class="st">"scale_down"</span>),</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>                <span class="at">full_width =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">width =</span> <span class="st">"4cm"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">2</span>, <span class="at">width =</span> <span class="st">"6.5cm"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">3</span>, <span class="at">width =</span> <span class="st">"3cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-herramientas-causales" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-herramientas-causales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.1: Herramientas econométricas para la inferencia causal en la cuantificación de daños
+</figcaption>
+<div aria-describedby="tbl-herramientas-causales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Herramienta</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Problema que aborda</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Capítulo de referencia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; width: 4cm; font-weight: bold;">Regresión con controles</td>
+<td style="text-align: left; width: 6.5cm;">Factores concurrentes observables</td>
+<td style="text-align: left; width: 3cm;">Caps. 5--6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 4cm; font-weight: bold;">Diferencias en diferencias</td>
+<td style="text-align: left; width: 6.5cm;">Factores comunes no observados (con tend. paralelas)</td>
+<td style="text-align: left; width: 3cm;">Cap. 7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; width: 4cm; font-weight: bold;">Control sintético</td>
+<td style="text-align: left; width: 6.5cm;">Contrafactual individual con pocas unidades</td>
+<td style="text-align: left; width: 3cm;">Cap. 14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 4cm; font-weight: bold;">Variables instrumentales</td>
+<td style="text-align: left; width: 6.5cm;">Endogeneidad y variables omitidas</td>
+<td style="text-align: left; width: 3cm;">Cap. 12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; width: 4cm; font-weight: bold;">Test de Granger</td>
+<td style="text-align: left; width: 6.5cm;">Dirección temporal de la causalidad</td>
+<td style="text-align: left; width: 3cm;">Cap. 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 4cm; font-weight: bold;">Estudio de eventos</td>
+<td style="text-align: left; width: 6.5cm;">Impacto de eventos discretos</td>
+<td style="text-align: left; width: 3cm;">Cap. 5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; width: 4cm; font-weight: bold;">Tests de cambio estructural</td>
+<td style="text-align: left; width: 6.5cm;">Datación de rupturas causales</td>
+<td style="text-align: left; width: 3cm;">Cap. 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 4cm; font-weight: bold;">Tests de placebo / falsificación</td>
+<td style="text-align: left; width: 6.5cm;">Validación de la identificación causal</td>
+<td style="text-align: left; width: 3cm;">Caps. 5, 7, 14</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>La <a href="#tbl-herramientas-causales" class="quarto-xref">Table&nbsp;<span>3.1</span></a> resume estas herramientas y los problemas que cada una aborda. No son mutuamente excluyentes: en un mismo informe pericial, el perito puede utilizar varias de ellas de forma complementaria. Un modelo de regresión con controles puede servir como estimación principal, los tests de cambio estructural para delimitar el período de daño, los placebos para validar la identificación causal y las variables instrumentales como análisis de robustez.</p>
+</section>
+<section id="la-causalidad-ante-el-tribunal" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="la-causalidad-ante-el-tribunal"><span class="header-section-number">3.8</span> La causalidad ante el tribunal</h2>
+<p>Quiero cerrar este capítulo con una consideración que conecta directamente con el principio rector de este manual: la necesidad de que el tribunal entienda el resultado. La inferencia causal es, probablemente, el aspecto más técnico de la cuantificación de daños, y al mismo tiempo el más importante para el resultado procesal. Si el perito no logra explicar al juez por qué su estimación refleja el efecto de la conducta y no el de otros factores, el informe pierde su valor probatorio.</p>
+<p>En mi experiencia, los tribunales son receptivos a los argumentos de causalidad cuando se presentan de forma estructurada y comprensible. Una figura que muestre la evolución de las ventas antes, durante y después de la infracción, junto con la evolución de empresas comparables, puede ser más persuasiva que una batería de tests estadísticos cuyos p-valores el juez no está en condiciones de evaluar. Un test de placebo que demuestre gráficamente que el modelo no detecta efectos espurios en períodos anteriores a la infracción puede resultar más convincente que una discusión técnica sobre la exogeneidad de los regresores.</p>
+<p>El perito debe, en definitiva, ser capaz de explicar su estrategia causal en un lenguaje accesible. Debe poder decir al tribunal: «He demostrado que el efecto que estimo es atribuible a la conducta ilícita y no a otros factores, porque he controlado por la recesión económica, he utilizado empresas no afectadas como referencia, he verificado que no aparecen efectos espurios antes de la infracción y he sometido mis resultados a análisis de sensibilidad que confirman su robustez.» Si el perito puede articular esta frase —y respaldarla con la evidencia empírica correspondiente—, habrá cumplido su función.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-conductas.html" class="pagination-link" aria-label="Conductas ilícitas y su impacto económico">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conductas ilícitas y su impacto económico</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-datos-evidencia.html" class="pagination-link" aria-label="Datos y evidencia para la cuantificación">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datos y evidencia para la cuantificación</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/carlanta/CompetitionDamagesMicroEconometrics/blob/main/03-causalidad.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

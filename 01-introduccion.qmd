@@ -1,0 +1,187 @@
+# Introducción a la cuantificación de daños económicos {#introduccion}
+
+```{r}
+#| label: setup-ch01
+#| include: false
+library(tidyverse)
+library(kableExtra)
+```
+
+## El daño económico como problema cuantificable
+
+Existe un momento, en todo procedimiento judicial o arbitral que involucra una conducta anticompetitiva o desleal, en que la discusión deja de ser puramente jurídica y se convierte en un problema de medición. El tribunal ya ha determinado ---o está en vías de hacerlo--- que existió una infracción. Lo que queda por resolver es la pregunta que, en última instancia, determinará la sentencia o el laudo: ¿cuánto vale el daño causado?
+
+Esta pregunta, aparentemente sencilla, encierra una complejidad técnica que suele subestimarse. No se trata simplemente de comparar dos cifras contables o de calcular la diferencia entre dos precios. Cuantificar un daño económico exige construir un escenario que nunca existió ---el mundo en que la infracción no se habría producido--- y compararlo con lo que efectivamente ocurrió. Esa construcción es, por naturaleza, un ejercicio de inferencia estadística y modelización econométrica, no un mero cálculo aritmético.
+
+A lo largo de más de veinticinco años de práctica profesional como perito económico en procedimientos judiciales y arbitrales, he constatado que la mayor dificultad no reside en la sofisticación del modelo empleado, sino en la capacidad de transmitir al tribunal qué se está midiendo, cómo se está midiendo y por qué el resultado es fiable. Un modelo econométrico impecable que el juez no comprende es, a todos los efectos procesales, un modelo inútil. Inversamente, una cuantificación sencilla pero bien comunicada puede resultar devastadoramente eficaz.
+
+Este manual nace de esa convicción: que la cuantificación de daños antitrust requiere tanto rigor técnico como claridad expositiva, y que ambas dimensiones son inseparables en la práctica pericial.
+
+
+## El escenario contrafactual: el concepto central
+
+Toda cuantificación de daños descansa sobre una idea fundamental que conviene establecer desde el principio, porque atraviesa cada capítulo de este libro y cada línea de cada informe pericial: el *escenario contrafactual* o *but-for scenario*.
+
+El razonamiento es el siguiente. El demandante ha sufrido un perjuicio económico como consecuencia de una conducta ilícita. Para medir ese perjuicio, necesitamos comparar dos situaciones: la que efectivamente se produjo (el *escenario factual*, observable) y la que se habría producido si la infracción no hubiera tenido lugar (el *escenario contrafactual*, no observable). La diferencia entre ambos escenarios constituye el daño.
+
+Esta lógica, que en abstracto parece elemental, plantea un desafío formidable en la práctica. El escenario contrafactual no se observa. Nadie puede saber con certeza qué habría ocurrido en un mercado sin la existencia de un cártel, ni cómo habrían evolucionado las ventas de una empresa si un competidor no hubiera incurrido en prácticas desleales. Lo que el perito económico hace es *estimar* ese escenario contrafactual utilizando métodos econométricos, datos históricos, comparaciones con mercados o empresas no afectadas, o proyecciones basadas en la trayectoria previa de la víctima.
+
+```{r}
+#| label: fig-contrafactual
+#| fig-cap: "Lógica del escenario contrafactual: el daño como diferencia entre lo que habría ocurrido y lo que ocurrió"
+#| fig-width: 8
+#| fig-height: 5
+
+set.seed(42)
+n <- 40
+t <- 1:n
+t_infraccion <- 20
+
+# Escenario contrafactual (sin infracción)
+ventas_cf <- 100 + 2.5 * t + rnorm(n, 0, 3)
+
+# Escenario factual (con infracción desde t=20)
+ventas_f <- ventas_cf
+ventas_f[t_infraccion:n] <- ventas_cf[t_infraccion:n] - 18 - rnorm(n - t_infraccion + 1, 0, 2)
+
+df_cf <- tibble(
+  periodo = t,
+  contrafactual = ventas_cf,
+  factual = ventas_f
+) |>
+  pivot_longer(cols = c(contrafactual, factual),
+               names_to = "escenario", values_to = "ventas")
+
+ggplot() +
+  geom_ribbon(
+    data = tibble(periodo = t_infraccion:n,
+                  ymin = ventas_f[t_infraccion:n],
+                  ymax = ventas_cf[t_infraccion:n]),
+    aes(x = periodo, ymin = ymin, ymax = ymax),
+    fill = "#e74c3c", alpha = 0.2
+  ) +
+  geom_line(data = df_cf, aes(x = periodo, y = ventas, 
+            color = escenario, linetype = escenario), linewidth = 1) +
+  geom_vline(xintercept = t_infraccion, linetype = "dashed", color = "grey40") +
+  annotate("text", x = t_infraccion + 0.5, y = max(ventas_cf) + 3,
+           label = "Inicio de la\ninfracción", hjust = 0, size = 3.5, color = "grey30") +
+  annotate("text", x = 32, y = mean(c(ventas_cf[32], ventas_f[32])),
+           label = "DAÑO", fontface = "bold", size = 4, color = "#c0392b") +
+  scale_color_manual(values = c("contrafactual" = "#2c3e50", "factual" = "#e74c3c"),
+                     labels = c("Escenario contrafactual\n(sin infracción)",
+                                "Escenario factual\n(observado)")) +
+  scale_linetype_manual(values = c("contrafactual" = "dashed", "factual" = "solid"),
+                        labels = c("Escenario contrafactual\n(sin infracción)",
+                                   "Escenario factual\n(observado)")) +
+  labs(x = "Período", y = "Ventas (miles €)",
+       color = NULL, linetype = NULL) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "bottom",
+        panel.grid.minor = element_blank())
+```
+
+La @fig-contrafactual ilustra esta lógica de forma esquemática. La línea continua representa la evolución real de las ventas de una empresa afectada por una conducta ilícita. La línea discontinua muestra la trayectoria que habría seguido esa misma variable en ausencia de la infracción. El área sombreada entre ambas líneas ---la brecha entre lo que ocurrió y lo que habría ocurrido--- es, precisamente, el daño que el perito debe cuantificar.
+
+Cada método de los que se presentan en este manual no es sino una forma diferente de construir esa línea discontinua: el método *antes-y-después* la proyecta a partir de la tendencia previa a la infracción; el método de *comparables* la infiere a partir de la evolución de empresas o mercados similares no afectados; las *diferencias en diferencias* combinan ambas lógicas; y el *control sintético* construye un contrafactual a medida a partir de una combinación ponderada de unidades no tratadas. Lo que tienen en común todos estos métodos es que intentan responder a la misma pregunta: ¿qué habría pasado si la infracción no hubiera existido?
+
+
+## Tipos de daño económico
+
+En la práctica pericial, los daños derivados de conductas anticompetitivas y desleales se manifiestan en formas diversas, y la correcta identificación del tipo de daño es el primer paso para seleccionar el método de cuantificación adecuado. No es lo mismo estimar cuánto pagó de más un comprador por culpa de un cártel que calcular cuánto dejó de ganar una empresa excluida del mercado por un abuso de posición dominante. Cada tipo de daño requiere un enfoque econométrico diferente.
+
+El **sobreprecio** (*overcharge*) es probablemente el tipo de daño más estudiado en la literatura de competencia y el más frecuente en litigación de cárteles. Cuando un grupo de empresas se colude para fijar precios por encima del nivel competitivo, los compradores pagan más de lo que habrían pagado en condiciones normales de mercado. La diferencia entre el precio real pagado y el precio que habría prevalecido en ausencia del cártel es el sobreprecio. La literatura empírica, sintetizada por Connor y Lande, estima que el sobreprecio medio de los cárteles se sitúa en el entorno del 20--25% sobre el precio competitivo, aunque la variabilidad entre casos es enorme.
+
+El **lucro cesante** (*lost profits*) aparece cuando la conducta ilícita ha provocado una reducción en los ingresos o los beneficios de la víctima. La empresa que ha sido objeto de denigración por un competidor desleal, o que ha sido excluida del mercado mediante prácticas predatorias, no solo ha dejado de vender: ha dejado de obtener los márgenes de beneficio asociados a esas ventas. La cuantificación del lucro cesante exige proyectar los beneficios que la víctima habría obtenido en el escenario contrafactual, descontando los costes evitados, y actualizarlos financieramente a la fecha de valoración.
+
+El **daño emergente** comprende las pérdidas patrimoniales efectivas y los gastos extraordinarios en que ha incurrido la víctima como consecuencia directa de la infracción: inversiones que se han depreciado prematuramente, contratos que se han perdido, costes de mitigación del daño. A diferencia del lucro cesante, que mira hacia los beneficios futuros no realizados, el daño emergente se refiere a pérdidas ya materializadas.
+
+El **efecto volumen** es un componente del daño frecuentemente olvidado en la práctica. Cuando un cártel eleva los precios, no solo provoca un sobreprecio: también reduce la cantidad demandada. El comprador que paga más por cada unidad también compra menos unidades de las que habría adquirido a precios competitivos. Este efecto de reducción de volumen constituye un daño adicional al sobreprecio y su omisión conduce a una subestimación sistemática del perjuicio total.
+
+```{r}
+#| label: tbl-tipos-dano
+#| tbl-cap: "Tipos de daño económico, conductas asociadas y métodos de cuantificación principales"
+
+tibble(
+  `Tipo de daño` = c("Sobreprecio (overcharge)",
+                      "Lucro cesante (lost profits)",
+                      "Daño emergente",
+                      "Efecto volumen"),
+  `Conducta típica` = c("Cárteles de precios, abuso explotativo",
+                         "Exclusión de mercado, denigración, imitación desleal",
+                         "Cualquier conducta con impacto patrimonial directo",
+                         "Cárteles (componente adicional al sobreprecio)"),
+  `Métodos principales` = c("Comparables, antes-y-después, DID, regresión de precios",
+                             "Proyección de márgenes, comparables de rentabilidad",
+                             "Análisis contable, valoración de activos",
+                             "Estimación de elasticidad-precio, modelos de demanda")
+) |>
+  kbl(booktabs = TRUE, escape = FALSE) |>
+  kable_styling(latex_options = c("hold_position", "scale_down"),
+                full_width = TRUE) |>
+  column_spec(1, bold = TRUE, width = "3.5cm") |>
+  column_spec(2, width = "5cm") |>
+  column_spec(3, width = "5.5cm")
+```
+
+La @tbl-tipos-dano resume los principales tipos de daño, las conductas que habitualmente los generan y los métodos de cuantificación más frecuentes para cada uno. Conviene tener presente que, en un mismo caso, pueden concurrir varios tipos de daño simultáneamente. Un cártel genera tanto un sobreprecio como un efecto volumen. Una práctica de exclusión de mercado puede producir lucro cesante y daño emergente al mismo tiempo. El perito debe identificar y cuantificar cada componente por separado, aunque la metodología de base pueda ser compartida.
+
+
+## El principio de restitución íntegra
+
+El ordenamiento jurídico europeo, y con él la Directiva 2014/104/UE, establece como principio rector de la cuantificación de daños el de **restitución íntegra** (*full compensation*). El artículo 3 de la Directiva dispone que toda persona que haya sufrido un perjuicio ocasionado por una infracción del Derecho de la competencia pueda reclamar y obtener el pleno resarcimiento de dicho perjuicio.
+
+Este principio tiene implicaciones directas para el trabajo del perito. La restitución íntegra significa que el demandante debe quedar, en la medida de lo posible, en la situación económica en que se habría encontrado si la infracción no se hubiera cometido. Ello comprende el derecho a la reparación del daño real (*damnum emergens*), del lucro cesante y al pago de intereses. Al mismo tiempo, la Directiva prohíbe el enriquecimiento injusto, de modo que la indemnización no debe colocar al demandante en una situación económica mejor que la contrafactual.
+
+Para el perito, el principio de restitución íntegra actúa como una brújula metodológica. Impone la obligación de considerar todos los componentes del daño ---no solo los más evidentes o fáciles de cuantificar--- y de ser transparente respecto a las limitaciones de la estimación. No cumple con este principio quien cuantifica únicamente el sobreprecio de un cártel e ignora el efecto volumen, ni quien estima el lucro cesante sin descontar los costes que la víctima dejó de soportar. La restitución íntegra exige una visión completa del perjuicio, lo cual requiere, a su vez, un análisis económico riguroso y exhaustivo.
+
+El Tribunal de Justicia de la Unión Europea ha reafirmado este principio de forma consistente. En el asunto *Courage v. Crehan* (2001), el TJUE estableció por primera vez que cualquier persona puede reclamar una indemnización por los daños causados por un contrato o un comportamiento susceptible de restringir o falsear la competencia. En *Manfredi* (2006), el Tribunal extendió este principio a la necesidad de que las normas nacionales permitan una reparación efectiva que abarque tanto el daño real como el lucro cesante, más intereses. La sentencia *Kone* (2014) amplió aún más el alcance de la protección, al reconocer la legitimación de los compradores que sufrieron un *umbrella effect* ---es decir, que pagaron precios inflados no por un miembro del cártel, sino por un competidor que elevó sus precios al amparo de la colusión.
+
+
+## El papel del perito economista
+
+En los procedimientos por daños antitrust, el perito economista ocupa una posición singular. No es un abogado, aunque su trabajo se inserta en un marco jurídico. No es un testigo de hechos, aunque utiliza datos empíricos. No es un juez, aunque en la práctica su cuantificación puede determinar el resultado económico de la sentencia. El perito es, fundamentalmente, un traductor: alguien que convierte una pregunta jurídica ---«¿cuánto vale el daño?»--- en un problema econométrico, lo resuelve con las herramientas de la disciplina y devuelve el resultado en un lenguaje que el tribunal pueda evaluar.
+
+Esta función de traducción es más difícil de lo que parece. He presenciado, a lo largo de mi carrera, decenas de casos en los que un informe pericial técnicamente correcto resultó ineficaz porque el juez no comprendió el método empleado, o porque la contraparte logró sembrar dudas razonables sobre unos resultados que eran, en realidad, robustos. También he visto informes técnicamente mediocres ---con modelos simplistas y datos insuficientes--- que resultaron persuasivos ante el tribunal porque estaban bien escritos y bien defendidos.
+
+La lección que extraigo de esa experiencia es clara: la calidad técnica del modelo es condición necesaria pero no suficiente. Un buen perito debe dominar la econometría, pero también debe saber comunicar. Debe saber explicar a un juez qué es un escenario contrafactual sin necesidad de recurrir a notación matemática. Debe saber defender su modelo frente a las objeciones de la contraparte sin caer en la arrogancia técnica ni en la excesiva simplificación. Debe, en definitiva, construir un puente entre dos lenguajes profesionales que rara vez se hablan entre sí.
+
+Este manual está diseñado para servir a ambos lados de ese puente. Los abogados encontrarán en cada capítulo una primera capa de explicación intuitiva que les permitirá comprender qué hace el perito, evaluar la razonabilidad de sus conclusiones y, sobre todo, formular las preguntas correctas durante el interrogatorio pericial. Los economistas encontrarán la formulación técnica completa, con los supuestos, las propiedades y la implementación en R, para que puedan aplicar cada método con rigor y transparencia.
+
+
+## El marco normativo: Directiva 2014/104/UE y guías de la Comisión Europea
+
+La cuantificación de daños por infracciones del Derecho de la competencia no opera en un vacío metodológico. La Directiva 2014/104/UE, junto con la *Guía Práctica* publicada por la Comisión Europea en 2013, proporciona un marco de referencia que todo perito debe conocer, aunque los métodos econométricos que se expondrán en este manual trascienden cualquier jurisdicción concreta.
+
+La Directiva establece varios principios que inciden directamente en la labor pericial. Además del ya mencionado principio de restitución íntegra, el artículo 17.1 dispone que los Estados miembros deben garantizar que la carga de la prueba y el nivel de prueba requeridos para la cuantificación del perjuicio no hagan prácticamente imposible o excesivamente difícil el ejercicio del derecho al resarcimiento. El artículo 17.2 introduce una presunción legal de que las infracciones de cártel causan un perjuicio, invirtiendo la carga de la prueba: es el infractor quien debe demostrar que su conducta no produjo daño, no la víctima quien debe probar que lo sufrió.
+
+La *Guía Práctica* de la Comisión Europea complementa la Directiva con orientaciones metodológicas. Describe los principales métodos de cuantificación ---comparables, antes-y-después, modelos de costes, modelos financieros--- y discute sus ventajas, limitaciones y ámbitos de aplicación. Aunque la Guía no es vinculante, constituye una referencia habitual en los procedimientos ante tribunales nacionales y su conocimiento resulta imprescindible para cualquier perito que trabaje en este ámbito.
+
+El estudio de Oxera (2009), encargado por la Comisión, fue el precursor de esas guías. Identificó los principales obstáculos prácticos para la cuantificación de daños en Europa ---la asimetría de información entre demandantes e infractores, la complejidad de los mercados, la necesidad de estimar escenarios contrafactuales--- y propuso un menú de métodos econométricos que sigue siendo, en esencia, el repertorio vigente.
+
+Es importante señalar que ningún método goza de preferencia legal sobre otro. Ni la Directiva ni la Guía Práctica prescriben un enfoque único. La elección del método depende de las circunstancias del caso: la disponibilidad de datos, las características del mercado afectado, el tipo de conducta y el tipo de daño. Lo que sí exigen es que el método elegido sea económicamente coherente, que los datos sean adecuados y que el resultado esté sometido a un análisis de sensibilidad que permita evaluar su robustez.
+
+
+## Estructura de este manual y cómo utilizarlo
+
+Este libro se organiza en cuatro partes que reflejan el flujo natural del trabajo pericial, desde los fundamentos conceptuales hasta la redacción del informe final.
+
+La **Parte I** (Capítulos 1--4) establece los cimientos: qué es un daño cuantificable, qué conductas lo generan, cómo se establece la causalidad y cómo se preparan los datos. Es la parte que debería leer cualquier abogado antes de encargar o evaluar un informe pericial de daños.
+
+La **Parte II** (Capítulos 5--10) presenta los métodos principales de estimación: el método antes-y-después, el de comparables, las diferencias en diferencias, la estimación del sobreprecio, el *passing-on* y el lucro cesante. Cada capítulo sigue una estructura de tres capas: primero, una explicación intuitiva accesible para juristas; segundo, la formulación econométrica para economistas; tercero, la implementación en R con datos simulados. Cada capítulo incluye, además, la relevancia jurídica del método, su análisis de sensibilidad y los errores más frecuentes en su aplicación.
+
+La **Parte III** (Capítulos 11--15) aborda métodos más avanzados: el análisis financiero-contable, las variables instrumentales, los datos de panel, el control sintético y la regresión cuantílica. Estos capítulos están dirigidos principalmente a economistas, aunque las capas intuitivas permiten a cualquier lector comprender la lógica de cada técnica.
+
+La **Parte IV** (Capítulos 16--19) cierra el ciclo con los aspectos prácticos del informe pericial: la actualización financiera del daño, el análisis de sensibilidad como filosofía general, los errores frecuentes en informes periciales y, finalmente, la redacción y defensa del informe ante tribunales.
+
+El lector puede seguir el libro de principio a fin o consultar los capítulos de forma independiente, según sus necesidades. Un abogado que necesite entender un informe pericial de sobreprecio puede ir directamente al Capítulo 8 y leer la primera capa. Un economista que prepare un dictamen basado en diferencias en diferencias puede consultar el Capítulo 7 completo, incluyendo el código en R. Un juez que deba evaluar la solidez de dos informes periciales contradictorios encontrará en el Capítulo 18 una guía de los errores más comunes que debe buscar.
+
+El código R de todos los ejemplos, junto con los datasets simulados, está disponible en el repositorio del manual. Los scripts son reproducibles: cualquier lector con una instalación básica de R puede ejecutar los análisis y verificar los resultados por sí mismo.
+
+
+## Lo que este manual no es
+
+Conviene terminar esta introducción con una advertencia honesta. Este libro es un manual de métodos econométricos aplicados a la cuantificación de daños. No es un tratado de Derecho de la competencia ---existen obras excelentes para eso--- ni una guía de litigación. No sustituye al juicio experto del perito, que debe adaptar los métodos a las circunstancias de cada caso, ni al criterio jurídico del abogado, que debe encuadrar la cuantificación en la estrategia procesal.
+
+Los datos utilizados en los ejemplos son simulados. Reproducen fielmente los patrones que se observan en casos reales ---sobreprecios del orden del 15-25%, rupturas estructurales claras, efectos de exclusión identificables---, pero no provienen de procedimientos concretos. La confidencialidad de los datos reales es una obligación profesional que no admite excepciones.
+
+Lo que sí aspira a ser este manual es una herramienta práctica y rigurosa que permita a abogados, jueces y economistas hablar el mismo idioma cuando se trata de poner una cifra al daño. Si al terminar su lectura el abogado sabe qué preguntar al perito, el perito sabe cómo responder al tribunal y el juez sabe cómo evaluar ambas intervenciones, este libro habrá cumplido su propósito.

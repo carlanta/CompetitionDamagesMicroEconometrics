@@ -1,0 +1,257 @@
+# Análisis financiero-contable del daño {#analisis-financiero}
+
+```{r}
+#| label: setup-ch11
+#| include: false
+library(tidyverse)
+library(kableExtra)
+```
+
+## La contabilidad como espejo del daño
+
+Cuando la conducta ilícita se manifiesta como una compresión de márgenes, una pérdida de rentabilidad o un deterioro patrimonial sostenido, los estados financieros de la víctima contienen la información más directa sobre la magnitud del perjuicio. El análisis financiero-contable no sustituye a la econometría, pero la complementa: permite verificar que las cifras del modelo econométrico son consistentes con lo que reflejan las cuentas de la empresa, y en algunos casos ---especialmente en supuestos de *margin squeeze* y precios predatorios--- constituye el método principal de cuantificación.
+
+Este capítulo se centra en tres herramientas del análisis financiero aplicado a la cuantificación de daños: el análisis de márgenes, el test del competidor igualmente eficiente (*as-efficient competitor test*) y la comparación de ratios de rentabilidad con un benchmark sectorial.
+
+
+## La intuición: si los números de la empresa no cuadran, alguien ha roto algo
+
+La lógica del análisis financiero-contable es la siguiente: si una empresa opera en condiciones normales de mercado, sus márgenes, su rentabilidad y su estructura de costes deberían situarse dentro de un rango coherente con los de empresas comparables del mismo sector. Cuando esos indicadores se deterioran de forma brusca y coincidente con la conducta ilícita, y cuando el deterioro no puede explicarse por factores externos, existe una presunción empírica de que la conducta ha causado el daño.
+
+```{r}
+#| label: fig-margenes-temporal
+#| fig-cap: "Evolución de los márgenes operativos de la víctima y del sector: la compresión durante el período de la conducta es visible"
+#| fig-width: 9
+#| fig-height: 5.5
+
+set.seed(1111)
+
+n <- 60
+fecha <- seq.Date(as.Date("2019-01-01"), by = "month", length.out = n)
+t <- 1:n
+inicio_conducta <- as.Date("2021-07-01")
+
+# Ingresos y costes de la víctima
+ingresos_victima <- 1000 + 8 * t + 40 * sin(2 * pi * t / 12) + rnorm(n, 0, 15)
+coste_insumo <- 350 + 4 * t + 15 * sin(2 * pi * t / 12) + rnorm(n, 0, 8)
+
+# Margin squeeze: el dominante sube el precio del insumo a la víctima
+squeeze <- if_else(fecha >= inicio_conducta, 80 + 0.6 * (t - 30), 0)
+coste_insumo_obs <- coste_insumo + squeeze
+
+otros_costes <- 400 + 2 * t + rnorm(n, 0, 10)
+
+margen_victima <- (ingresos_victima - coste_insumo_obs - otros_costes) / ingresos_victima
+margen_cf <- (ingresos_victima - coste_insumo - otros_costes) / ingresos_victima
+margen_sector <- 0.22 + 0.001 * t / n + rnorm(n, 0, 0.012)
+
+df_ms <- tibble(
+  fecha = fecha, t = t,
+  ingresos = round(ingresos_victima, 2),
+  coste_insumo = round(coste_insumo, 2),
+  coste_insumo_obs = round(coste_insumo_obs, 2),
+  squeeze = round(squeeze, 2),
+  otros_costes = round(otros_costes, 2),
+  margen_victima = round(margen_victima, 4),
+  margen_cf = round(margen_cf, 4),
+  margen_sector = round(margen_sector, 4),
+  conducta = if_else(fecha >= inicio_conducta, 1, 0)
+)
+
+df_plot <- df_ms |>
+  select(fecha, margen_victima, margen_cf, margen_sector) |>
+  pivot_longer(-fecha, names_to = "serie", values_to = "margen")
+
+ggplot(df_plot, aes(x = fecha, y = margen, color = serie)) +
+  annotate("rect", xmin = inicio_conducta, xmax = max(fecha),
+           ymin = -Inf, ymax = Inf, fill = "#e74c3c", alpha = 0.06) +
+  geom_line(linewidth = 0.9) +
+  geom_vline(xintercept = inicio_conducta, color = "grey50", linetype = "dashed") +
+  scale_color_manual(values = c("margen_victima" = "#e74c3c", "margen_cf" = "#2c3e50",
+                                "margen_sector" = "#3498db"),
+                     labels = c("Víctima (observado)", "Víctima (contrafactual)", "Media sector")) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(x = NULL, y = "Margen operativo", color = NULL) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank())
+```
+
+La @fig-margenes-temporal muestra la compresión típica de un *margin squeeze*: el margen de la víctima cae por debajo del sector durante la conducta, mientras que su contrafactual (sin el sobrecoste del insumo) habría permanecido en línea con la referencia sectorial.
+
+
+## El test del competidor igualmente eficiente
+
+En los casos de *margin squeeze* y precios predatorios, la pregunta central no es si la víctima perdió dinero, sino si un competidor igualmente eficiente habría podido operar con rentabilidad dados los precios fijados por el dominante. Este es el *as-efficient competitor test* (AEC), avalado por la jurisprudencia del TJUE en los asuntos *Telefónica* y *Deutsche Telekom*.
+
+$$
+\text{Margen AEC}_t = \frac{P_t^{retail} - C_t^{insumo} - C_t^{propios}}{P_t^{retail}}
+$$
+
+Si $\text{Margen AEC}_t < 0$, un competidor tan eficiente como el dominante no habría podido cubrir sus costes: la conducta constituye un abuso.
+
+```{r}
+#| label: tbl-aec-test
+#| tbl-cap: "Test del competidor igualmente eficiente: márgenes antes y durante la conducta"
+
+# Precio retail del dominante (referencia del mercado)
+precio_retail <- ingresos_victima / (round(pmax(80, 500 - 0.3 * ingresos_victima + rnorm(n, 0, 5)), 0))
+costes_propios_eficiente <- otros_costes * 0.95  # asumimos eficiencia similar
+
+margen_aec <- (precio_retail - coste_insumo_obs / (ingresos_victima / precio_retail) - costes_propios_eficiente / (ingresos_victima / precio_retail)) / precio_retail
+
+resumen_aec <- df_ms |>
+  mutate(margen_aec = round(margen_victima, 4)) |>
+  group_by(Periodo = if_else(conducta == 1, "Durante conducta", "Pre-conducta")) |>
+  summarise(
+    `Margen medio víctima` = round(mean(margen_victima), 4),
+    `Margen medio sector` = round(mean(margen_sector), 4),
+    `Meses con margen < 0` = sum(margen_victima < 0),
+    .groups = "drop"
+  )
+
+resumen_aec |>
+  knitr::kable(format = "pipe", align = c("l", "r", "r", "r"))
+```
+
+
+## La idea econométrica: regresión de márgenes con variable de intervención
+
+Para cuantificar el impacto de la conducta sobre los márgenes, el perito puede estimar un modelo de regresión donde el margen operativo depende de factores de mercado y de una variable indicadora de la conducta:
+
+$$
+m_t = \alpha + \beta \, \text{Conducta}_t + \gamma_1 \log(Demanda_t) + \gamma_2 \text{Tendencia}_t + \tau_s + \varepsilon_t
+$$
+
+El coeficiente $\beta$ mide la caída del margen atribuible a la conducta, una vez descontados los efectos de demanda, tendencia y estacionalidad.
+
+```{r}
+#| label: tbl-regresion-margen
+#| tbl-cap: "Estimación del impacto de la conducta sobre el margen operativo"
+
+modelo_margen <- lm(margen_victima ~ conducta + t + factor(format(fecha, "%m")),
+                    data = df_ms)
+beta_cond <- unname(coef(modelo_margen)["conducta"])
+se_cond <- sqrt(vcov(modelo_margen)["conducta", "conducta"])
+
+tibble(
+  Parámetro = "Conducta",
+  Estimación = round(beta_cond, 4),
+  `Error estándar` = round(se_cond, 4),
+  `Impacto en p.p.` = paste0(round(beta_cond * 100, 2), " p.p."),
+  `IC 95%` = paste0("[", round((beta_cond - 1.96 * se_cond) * 100, 2), ", ",
+                    round((beta_cond + 1.96 * se_cond) * 100, 2), "] p.p.")
+) |>
+  knitr::kable(format = "pipe", align = c("l", "r", "r", "r", "r"))
+```
+
+
+## Cuantificación monetaria del daño por compresión de márgenes
+
+```{r}
+#| label: tbl-dano-margen
+#| tbl-cap: "Daño por compresión de márgenes: la diferencia entre beneficio contrafactual y observado"
+
+df_ms <- df_ms |>
+  mutate(
+    beneficio_obs = ingresos * margen_victima,
+    beneficio_cf  = ingresos * margen_cf,
+    dano = if_else(conducta == 1, beneficio_cf - beneficio_obs, 0)
+  )
+
+resumen_ms <- df_ms |>
+  filter(conducta == 1) |>
+  summarise(
+    `Meses afectados` = as.character(n()),
+    `Margen medio observado` = paste0(round(mean(margen_victima) * 100, 2), "%"),
+    `Margen medio contrafactual` = paste0(round(mean(margen_cf) * 100, 2), "%"),
+    `Daño total` = as.character(round(sum(dano), 2)),
+    `Daño medio mensual` = as.character(round(mean(dano), 2))
+  )
+
+resumen_ms |>
+  pivot_longer(everything(), names_to = "Concepto", values_to = "Valor") |>
+  knitr::kable(format = "pipe", align = c("l", "r"))
+```
+
+```{r}
+#| label: fig-dano-margen-mensual
+#| fig-cap: "Daño mensual por compresión de márgenes"
+#| fig-width: 9
+#| fig-height: 4.8
+
+ggplot(df_ms |> filter(conducta == 1), aes(x = fecha, y = dano)) +
+  geom_col(fill = "#c0392b", alpha = 0.85) +
+  labs(x = NULL, y = "Daño mensual (miles EUR)") +
+  theme_minimal(base_size = 13) +
+  theme(panel.grid.minor = element_blank())
+```
+
+
+## Implementación en R
+
+```{r}
+#| label: code-financiero-r
+#| echo: true
+#| eval: false
+
+# Ratios financieros
+datos <- datos |>
+  mutate(
+    margen_bruto = (ingresos - coste_ventas) / ingresos,
+    margen_operativo = (ingresos - coste_ventas - gastos_operativos) / ingresos,
+    roa = beneficio_neto / activo_total,
+    roe = beneficio_neto / fondos_propios
+  )
+
+# Test AEC
+datos <- datos |>
+  mutate(
+    margen_aec = (precio_retail - coste_insumo_regulado - costes_propios) / precio_retail,
+    squeeze = margen_aec < 0
+  )
+```
+
+
+## Relevancia jurídica
+
+El análisis financiero-contable es el método de referencia en los casos de *margin squeeze*. El TJUE, en *Deutsche Telekom* (2010) y *Telefónica* (2014), estableció que la conducta constituye un abuso cuando el margen entre el precio mayorista del insumo y el precio minorista no permite a un competidor igualmente eficiente operar con rentabilidad. La Comisión Europea ha utilizado sistemáticamente el test AEC en sus decisiones de abuso de posición dominante.
+
+En los casos de precios predatorios, el análisis se centra en si el dominante fija precios por debajo de sus costes variables medios (test *AKZO*) o por debajo de sus costes totales medios con intención de eliminar competidores.
+
+
+## Sensibilidad
+
+```{r}
+#| label: tbl-sensibilidad-margen
+#| tbl-cap: "Sensibilidad del daño al margen de referencia utilizado"
+
+sens_ms <- tibble(
+  `Referencia de margen` = c("Margen contrafactual propio", "Media del sector",
+                              "Percentil 25 del sector"),
+  `Margen referencia` = c(round(mean(df_ms$margen_cf[df_ms$conducta == 1]), 4),
+                           round(mean(df_ms$margen_sector[df_ms$conducta == 1]), 4),
+                           round(quantile(df_ms$margen_sector[df_ms$conducta == 1], 0.25), 4)),
+  `Daño estimado` = c(
+    round(sum(df_ms$dano[df_ms$conducta == 1]), 2),
+    round(sum((df_ms$margen_sector - df_ms$margen_victima)[df_ms$conducta == 1] * df_ms$ingresos[df_ms$conducta == 1]), 2),
+    round(sum((quantile(df_ms$margen_sector[df_ms$conducta == 1], 0.25) - df_ms$margen_victima[df_ms$conducta == 1]) * df_ms$ingresos[df_ms$conducta == 1]), 2)
+  )
+)
+
+sens_ms |>
+  knitr::kable(format = "pipe", align = c("l", "r", "r"))
+```
+
+
+## Errores frecuentes
+
+El error más grave es confundir el deterioro del margen con el daño. El margen puede deteriorarse por razones ajenas a la conducta ---aumento de costes de materias primas, pérdida de eficiencia, cambio en el mix de productos---. El perito debe aislar la fracción del deterioro atribuible a la conducta.
+
+El segundo error es utilizar ratios financieros sin normalizar por el ciclo económico o por la estacionalidad. Un ROA que cae en el cuarto trimestre puede reflejar un patrón estacional, no un daño.
+
+El tercer error es comparar con un sector mal definido. Si el benchmark incluye empresas con estructuras de negocio radicalmente distintas, la comparación pierde valor.
+
+
+## Lo que un tribunal debe retener
+
+El análisis financiero-contable traduce la conducta en números que cualquier tribunal puede entender: márgenes que caen, rentabilidades que se deterioran, costes que se elevan de forma anómala. Cuando esos indicadores divergen del sector y coinciden con la conducta, el método proporciona una cuantificación intuitiva y verificable del perjuicio.

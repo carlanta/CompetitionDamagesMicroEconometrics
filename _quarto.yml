@@ -1,0 +1,89 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Cuantificación de Daños Antitrust"
+  subtitle: "Microeconometría Aplicada a la Cuantificación de Daños por Competencia Desleal y Prácticas Anticompetitivas"
+  author: "Carlos de Anta Puig"
+  date: "2026"
+  repo-url: https://github.com/carlanta/CompetitionDamagesMicroEconometrics
+  repo-actions: [source]
+
+  sidebar:
+    style: floating
+    search: true
+
+  chapters:
+    - index.qmd
+    - 01-introduccion.qmd
+    - 02-conductas.qmd
+    - 03-causalidad.qmd
+    - 04-datos-evidencia.qmd
+    - 05-before-after.qmd
+    - 06-comparables.qmd
+    - 07-did.qmd
+    - 08-sobreprecio.qmd
+    - 09-passing-on.qmd
+    - 10-lucro-cesante.qmd
+    - 11-analisis-financiero.qmd
+    - 12-endogeneidad-iv.qmd
+    - 13-panel.qmd
+    - 14-control-sintetico.qmd
+    - 15-regresion-cuantilica.qmd
+    - 16-intereses.qmd
+    - 17-sensibilidad.qmd
+    - 18-errores.qmd
+    - 19-informe-pericial.qmd
+    - references.qmd
+
+bibliography: references.bib
+csl: https://www.zotero.org/styles/chicago-author-date
+
+execute:
+  warning: false
+  message: false
+
+format:
+  pdf:
+    dpi: 600
+    documentclass: book
+    fontsize: 11pt
+
+    tbl-colwidths: auto
+
+    geometry:
+      - paperwidth=17cm
+      - paperheight=24cm
+      - margin=2.5cm
+
+    number-sections: true
+    toc: true
+    toc-title: "Índice"
+    titlepage: false
+
+    echo: false
+
+    include-in-header: preamble.tex
+    include-before-body: cover.tex
+
+    header-includes:
+      - \usepackage{booktabs}
+      - \usepackage{longtable}
+      - \usepackage{float}
+
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    number-sections: true
+
+    grid:
+      sidebar-width: 280px
+      body-width: 900px
+      margin-width: 250px
+
+    echo: true
+    code-fold: true

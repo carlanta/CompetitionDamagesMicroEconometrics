@@ -1,0 +1,276 @@
+# El *passing-on* y la cadena de distribución {#passing-on}
+
+```{r}
+#| label: setup-ch09
+#| include: false
+library(tidyverse)
+library(kableExtra)
+```
+
+## Quién sufre realmente el daño
+
+Los capítulos anteriores han abordado la cuantificación del sobreprecio desde la perspectiva del comprador directo: la empresa que adquiere el producto cartelizado y paga más de lo que habría pagado en condiciones competitivas. Pero en la realidad económica, esa empresa no siempre absorbe íntegramente el sobrecoste. Si opera como intermediario ---mayorista, distribuidor, transformador industrial---, puede repercutir parte o la totalidad del sobreprecio a sus propios clientes, elevando el precio de venta aguas abajo.
+
+Esta transmisión del sobreprecio a lo largo de la cadena de distribución es lo que la literatura y la práctica jurídica denominan *passing-on*. Y plantea una pregunta que está en el centro de muchos procedimientos de daños: si el comprador directo trasladó el sobrecoste, ¿sufrió realmente un perjuicio? Y si lo trasladó a un comprador indirecto, ¿tiene este derecho a reclamar?
+
+El *passing-on* no es un concepto meramente teórico. Es un argumento defensivo que las empresas infractoras invocan con frecuencia para reducir la indemnización debida al comprador directo, y al mismo tiempo es la base sobre la que los compradores indirectos fundamentan su legitimación activa. Para el perito, estimar la tasa de repercusión (*pass-through rate*) es una tarea empírica que requiere datos, modelos y una comprensión precisa de la estructura del mercado aguas abajo.
+
+
+## La intuición: el sobreprecio viaja por la cadena
+
+Imaginemos un cártel que eleva en 10 euros el precio de un componente industrial. El fabricante que compra ese componente lo incorpora a su producto final. Si el mercado aguas abajo es competitivo y el fabricante tiene poco poder de mercado, probablemente traslade una parte sustancial del sobrecoste al precio final. Si, por el contrario, el fabricante opera en un mercado con demanda inelástica y pocos competidores, puede absorber el sobrecoste sin alterar su precio de venta.
+
+La tasa de *pass-through* mide exactamente esa proporción. Un *pass-through* del 60% significa que, de cada euro de sobrecoste, 60 céntimos se trasladan al precio aguas abajo y 40 céntimos los absorbe el intermediario. En el primer caso, el daño del comprador directo se reduce en un 60% pero aparece un daño equivalente en el comprador indirecto. En el segundo, el comprador directo soporta el 100% del sobreprecio.
+
+```{r}
+#| label: fig-passing-on-intuicion
+#| fig-cap: "Transmisión del sobreprecio a lo largo de la cadena de distribución: el pass-through determina cómo se reparte el daño entre compradores directos e indirectos"
+#| fig-width: 9
+#| fig-height: 5.5
+
+set.seed(909)
+
+n <- 60
+fecha <- seq.Date(as.Date("2019-01-01"), by = "month", length.out = n)
+t <- 1:n
+inicio_cartel <- as.Date("2021-07-01")
+
+coste_base <- 40 + 0.3 * t + 2 * sin(2 * pi * t / 12) + rnorm(n, 0, 1)
+sobreprecio_upstream <- if_else(fecha >= inicio_cartel, 10 + 0.05 * (t - 30), 0)
+coste_total <- coste_base + sobreprecio_upstream
+
+pass_through_rate <- 0.62
+precio_downstream <- 80 + 0.55 * coste_total + pass_through_rate * sobreprecio_upstream +
+  3 * sin(2 * pi * t / 12) + rnorm(n, 0, 1.5)
+precio_downstream_cf <- 80 + 0.55 * coste_base + 3 * sin(2 * pi * t / 12) + rnorm(n, 0, 1.5)
+
+cantidad <- round(pmax(30, 200 - 1.2 * precio_downstream + rnorm(n, 0, 5)), 0)
+
+df_po <- tibble(
+  fecha = fecha,
+  coste_base = round(coste_base, 2),
+  sobreprecio_upstream = round(sobreprecio_upstream, 2),
+  coste_total = round(coste_total, 2),
+  precio_downstream = round(precio_downstream, 2),
+  precio_downstream_cf = round(precio_downstream_cf, 2),
+  cantidad = cantidad,
+  cartel = if_else(fecha >= inicio_cartel, 1, 0)
+)
+
+df_plot <- df_po |>
+  select(fecha, precio_downstream, precio_downstream_cf) |>
+  pivot_longer(-fecha, names_to = "serie", values_to = "precio")
+
+ggplot(df_plot, aes(x = fecha, y = precio, color = serie)) +
+  annotate("rect",
+           xmin = inicio_cartel, xmax = max(fecha),
+           ymin = -Inf, ymax = Inf,
+           fill = "#e74c3c", alpha = 0.06) +
+  geom_line(linewidth = 0.95) +
+  geom_vline(xintercept = inicio_cartel, color = "grey50", linetype = "dashed") +
+  scale_color_manual(values = c("precio_downstream" = "#e74c3c",
+                                "precio_downstream_cf" = "#2c3e50"),
+                     labels = c("Precio aguas abajo (observado)",
+                                "Precio contrafactual (sin cártel)")) +
+  labs(x = NULL, y = "Precio aguas abajo", color = NULL) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank())
+```
+
+La @fig-passing-on-intuicion muestra cómo el precio aguas abajo se separa de su trayectoria contrafactual tras el inicio del cártel upstream. La brecha entre ambas líneas refleja la parte del sobreprecio que el intermediario ha repercutido a sus clientes. No es el sobreprecio completo: es la fracción transmitida, que depende de la estructura competitiva del mercado aguas abajo.
+
+
+## La economía del pass-through
+
+La teoría económica establece que la tasa de *pass-through* depende de tres factores principales: la elasticidad de la demanda, la estructura de costes del intermediario y el grado de competencia en el mercado aguas abajo.
+
+En competencia perfecta con costes marginales constantes, el *pass-through* teórico es del 100%: todo incremento de costes se traslada íntegramente al precio. En monopolio con demanda lineal, el *pass-through* es del 50%. En oligopolios con productos diferenciados, la tasa se sitúa típicamente entre el 40% y el 80%, dependiendo de la intensidad competitiva y de la curvatura de la función de demanda.
+
+Estas referencias teóricas son útiles como marco, pero en la práctica pericial la tasa de *pass-through* debe estimarse empíricamente. La teoría indica dónde buscar; los datos determinan la respuesta concreta para cada caso.
+
+
+## La idea econométrica: la regresión costes-precios
+
+El modelo econométrico estándar para estimar el *pass-through* es una regresión del precio aguas abajo sobre el coste del insumo afectado por el cártel, controlando por otros determinantes del precio:
+
+$$
+P_t^{down} = \alpha + \rho \, C_t^{up} + \gamma X_t + \varepsilon_t
+$$
+
+donde $P_t^{down}$ es el precio aguas abajo, $C_t^{up}$ es el coste del insumo (que incluye el sobreprecio durante el período cartelizado) y $X_t$ recoge otros factores que afectan al precio de venta: costes laborales, demanda, estacionalidad.
+
+El parámetro $\rho$ es la tasa de *pass-through*. Si $\rho = 0.65$, significa que un incremento de un euro en el coste del insumo se traslada en 65 céntimos al precio aguas abajo.
+
+```{r}
+#| label: tbl-passing-on-reg
+#| tbl-cap: "Estimación de la tasa de pass-through mediante regresión costes-precios"
+
+modelo_po <- lm(precio_downstream ~ coste_total + factor(format(fecha, "%m")), data = df_po)
+
+rho <- unname(coef(modelo_po)["coste_total"])
+se_rho <- sqrt(vcov(modelo_po)["coste_total", "coste_total"])
+
+tabla_po <- tibble(
+  Parámetro = "Pass-through (coste total)",
+  Estimación = round(rho, 4),
+  `Error estándar` = round(se_rho, 4),
+  `IC 95% inferior` = round(rho - 1.96 * se_rho, 4),
+  `IC 95% superior` = round(rho + 1.96 * se_rho, 4)
+)
+
+tabla_po |>
+  knitr::kable(format = "pipe", align = c("l", "r", "r", "r", "r"))
+```
+
+La @tbl-passing-on-reg muestra la estimación central. El coeficiente indica qué proporción de cada euro adicional de coste se traslada al precio final. Su intervalo de confianza permite al tribunal evaluar la precisión de la estimación.
+
+
+## Del pass-through al reparto del daño
+
+Una vez estimada la tasa de *pass-through*, el perito puede descomponer el daño total en dos componentes: el daño absorbido por el comprador directo y el daño repercutido al comprador indirecto.
+
+$$
+D^{directo} = \sum_{t \in \text{cartel}} (1 - \hat{\rho}) \cdot S_t \cdot Q_t
+$$
+
+$$
+D^{indirecto} = \sum_{t \in \text{cartel}} \hat{\rho} \cdot S_t \cdot Q_t
+$$
+
+donde $S_t$ es el sobreprecio upstream y $Q_t$ la cantidad adquirida.
+
+```{r}
+#| label: tbl-passing-on-dano
+#| tbl-cap: "Descomposición del daño entre comprador directo e indirecto"
+
+df_po <- df_po |>
+  mutate(
+    dano_directo   = if_else(cartel == 1, (1 - rho) * sobreprecio_upstream * cantidad, 0),
+    dano_indirecto = if_else(cartel == 1, rho * sobreprecio_upstream * cantidad, 0),
+    dano_total     = dano_directo + dano_indirecto
+  )
+
+resumen_po <- df_po |>
+  filter(cartel == 1) |>
+  summarise(
+    `Meses cartelizados` = n(),
+    `Sobreprecio medio upstream` = round(mean(sobreprecio_upstream), 2),
+    `Pass-through estimado` = round(rho, 4),
+    `Daño comprador directo` = round(sum(dano_directo), 2),
+    `Daño comprador indirecto` = round(sum(dano_indirecto), 2),
+    `Daño total` = round(sum(dano_total), 2)
+  )
+
+resumen_po |>
+  pivot_longer(everything(), names_to = "Concepto", values_to = "Valor") |>
+  knitr::kable(format = "pipe", align = c("l", "r"))
+```
+
+La @tbl-passing-on-dano es la tabla que un tribunal necesita ver. Muestra cómo el mismo daño total se reparte entre los dos eslabones de la cadena en función de la tasa de repercusión estimada. Esta descomposición tiene consecuencias directas sobre la cuantía de la indemnización que puede reclamar cada parte.
+
+```{r}
+#| label: fig-passing-on-reparto
+#| fig-cap: "Reparto mensual del daño entre comprador directo (absorbe el sobrecoste) y comprador indirecto (recibe el sobreprecio repercutido)"
+#| fig-width: 9
+#| fig-height: 5
+
+df_dano_po <- df_po |>
+  filter(cartel == 1) |>
+  select(fecha, dano_directo, dano_indirecto) |>
+  pivot_longer(-fecha, names_to = "componente", values_to = "dano")
+
+ggplot(df_dano_po, aes(x = fecha, y = dano, fill = componente)) +
+  geom_col(position = "stack", alpha = 0.85) +
+  scale_fill_manual(values = c("dano_directo" = "#2c3e50", "dano_indirecto" = "#e74c3c"),
+                    labels = c("Comprador directo", "Comprador indirecto")) +
+  labs(x = NULL, y = "Daño mensual", fill = NULL) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank())
+```
+
+
+## Implementación en R: de los costes al reparto del daño
+
+```{r}
+#| label: code-passing-on-r
+#| echo: true
+#| eval: false
+
+# Modelo de pass-through: regresión costes-precios
+fit_po <- lm(precio_downstream ~ coste_upstream + demanda + factor(mes),
+             data = datos)
+
+# Tasa de pass-through
+rho <- coef(fit_po)["coste_upstream"]
+
+# Reparto del daño
+datos <- datos |>
+  mutate(
+    dano_directo   = (1 - rho) * sobreprecio * cantidad,
+    dano_indirecto = rho * sobreprecio * cantidad
+  )
+```
+
+
+## Relevancia jurídica del passing-on
+
+El *passing-on* ocupa una posición central en la Directiva 2014/104/UE. Los artículos 12 a 16 regulan específicamente esta cuestión desde dos perspectivas complementarias.
+
+Como **defensa del infractor** (art. 13), la empresa condenada puede alegar que el comprador directo repercutió el sobreprecio y, por tanto, no sufrió un daño equivalente al sobreprecio total. La carga de la prueba recae sobre el infractor: es él quien debe demostrar, con un grado razonable de probabilidad, que se produjo la repercusión y en qué medida.
+
+Como **fundamento de la acción del comprador indirecto** (art. 14), la Directiva reconoce expresamente la legitimación de quienes adquirieron bienes o servicios del comprador directo. El artículo 14.2 establece una presunción de que la repercusión se produjo cuando se acrediten tres condiciones: que el infractor cometió la infracción, que esta generó un sobrecoste para el comprador directo y que el comprador indirecto adquirió los bienes o servicios afectados.
+
+La jurisprudencia del TJUE ha consolidado esta arquitectura. En *Kone* [@kone2014], el Tribunal reconoció que incluso compradores de empresas no cartelizadas pueden sufrir un daño indemnizable si los precios de mercado se elevaron como consecuencia del entorno creado por el cártel (*umbrella effect*). En *Skanska* [@skanska2019], el Tribunal reforzó el principio de que la responsabilidad por daños antitrust se extiende a los sucesores económicos de las empresas infractoras.
+
+Para el perito, estas disposiciones significan que la estimación del *pass-through* no es un ejercicio opcional: en muchos casos, es un requisito procesal. Si el infractor invoca la defensa del *passing-on*, el perito del demandante debe estar en condiciones de demostrar que la repercusión fue parcial o nula. Si el demandante es un comprador indirecto, su perito debe cuantificar la fracción del sobreprecio que efectivamente llegó hasta su eslabón de la cadena.
+
+
+## Sensibilidad: cuánto cambia el pass-through con la especificación
+
+```{r}
+#| label: tbl-passing-on-sensibilidad
+#| tbl-cap: "Análisis de sensibilidad de la tasa de pass-through bajo diferentes especificaciones"
+
+estimar_po <- function(formula, data) {
+  fit <- lm(formula, data = data)
+  rho <- unname(coef(fit)["coste_total"])
+  tibble(`Pass-through` = round(rho, 4))
+}
+
+sens_po <- bind_rows(
+  estimar_po(precio_downstream ~ coste_total, df_po) |>
+    mutate(Especificación = "Solo coste total"),
+  estimar_po(precio_downstream ~ coste_total + factor(format(fecha, "%m")), df_po) |>
+    mutate(Especificación = "Con estacionalidad"),
+  lm(precio_downstream ~ coste_base + sobreprecio_upstream + factor(format(fecha, "%m")),
+     data = df_po) |>
+    (\(fit) tibble(`Pass-through` = round(unname(coef(fit)["sobreprecio_upstream"]), 4),
+                   Especificación = "Sobreprecio separado"))()
+) |>
+  select(Especificación, `Pass-through`)
+
+sens_po |>
+  knitr::kable(format = "pipe", align = c("l", "r"))
+```
+
+La @tbl-passing-on-sensibilidad muestra que la estimación del *pass-through* puede variar según cómo se especifique el modelo. La comparación entre la estimación con coste total agregado y la que separa el sobreprecio del coste base es especialmente informativa: si ambas convergen, la estimación gana en credibilidad.
+
+
+## Errores frecuentes en la estimación del passing-on
+
+El error más grave es asumir sin evidencia empírica que el *pass-through* es del 100% o del 0%. Ambos extremos son teóricamente posibles pero empíricamente infrecuentes. Un infractor que alega un *passing-on* total sin aportar evidencia econométrica está construyendo una defensa sin fundamento. Un demandante que ignora la posibilidad de repercusión está sobreestimando su daño directo.
+
+El segundo error consiste en utilizar un modelo de *pass-through* estimado en un mercado distinto o en un período diferente sin justificar la extrapolación. Las tasas de repercusión dependen de las condiciones competitivas específicas del mercado aguas abajo, y estas pueden variar sustancialmente entre sectores, territorios y períodos.
+
+Un tercer error es confundir el *pass-through* de costes generales con el *pass-through* del sobreprecio específico del cártel. La literatura económica distingue entre ambos conceptos: la elasticidad de transmisión de costes ordinarios no es necesariamente idéntica a la elasticidad de transmisión de un sobrecoste ilícito, sobre todo si el sobreprecio es percibido como temporal o si afecta de forma asimétrica a los competidores del intermediario.
+
+El cuarto error, muy común en la práctica, es tratar el *passing-on* como una cuestión binaria ---se repercutió o no se repercutió--- cuando en realidad es una cuestión de grado. La tasa de repercusión es un número entre 0 y 1, y la tarea del perito consiste precisamente en estimarlo con la mayor precisión posible.
+
+Por último, un error procesal frecuente: olvidar que el *passing-on* no elimina el daño, sino que lo redistribuye. Si el comprador directo repercutió el 70% del sobreprecio, su daño se reduce en un 70%, pero aparece un daño equivalente en el comprador indirecto. El daño total del cártel no cambia; lo que cambia es quién lo soporta.
+
+
+## Lo que un tribunal debe retener
+
+El *passing-on* no es una cuestión de todo o nada. Es una cuestión empírica que se resuelve estimando la tasa de repercusión con datos del mercado aguas abajo. Esa estimación determina cómo se reparte el daño total entre los distintos eslabones de la cadena y, por tanto, quién tiene derecho a reclamar qué cuantía.
+
+Cuando el perito logra estimar esa tasa con precisión razonable y someterla a análisis de sensibilidad, el tribunal dispone de una base sólida para asignar responsabilidades. Cuando la estimación se omite o se sustituye por un supuesto arbitrario, la cuantificación del daño queda incompleta y vulnerable a impugnación.

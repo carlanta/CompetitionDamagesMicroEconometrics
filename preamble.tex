@@ -1,0 +1,104 @@
+% Add cover image to the auto-generated title page
+\usepackage{titling}
+\pretitle{\begin{center}\includegraphics[width=0.7\textwidth]{cover.png}\par\vspace{1.5cm}\Huge\bfseries}
+\posttitle{\par\end{center}\vspace{0.5cm}}
+\preauthor{\begin{center}\Large}
+\postauthor{\par\end{center}}
+\predate{\begin{center}\large}
+\postdate{\par\end{center}}
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{spanish}
+
+% =========================
+% TIPOGRAFÍA
+% =========================
+
+\setmainfont{TeX Gyre Pagella} % evita problemas con € y mejora estética
+\usepackage{microtype}
+
+% =========================
+% DISEÑO GENERAL
+% =========================
+
+\linespread{1.15}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+% =========================
+% ESPACIO ENTRE ECUACIONES
+% =========================
+
+\raggedbottom
+\setlength{\abovedisplayskip}{10pt}
+\setlength{\belowdisplayskip}{10pt}
+
+% =========================
+% CABECERAS (tipo libro)
+% =========================
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyfoot[C]{\thepage}
+
+\fancyhead[LE]{\leftmark}
+\fancyhead[RO]{\rightmark}
+
+% Cabeceras limpias
+
+% =========================
+% FORMATO DE CAPÍTULOS
+% =========================
+
+\usepackage{titlesec}
+
+% Capítulos
+\titleformat{\chapter}[display]
+  {\normalfont\Huge\bfseries}
+  {\chaptername\ \thechapter}
+  {1em}
+  {\raggedright}
+
+% Secciones
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% IMPORTANTE: evitar errores de Quarto
+\titleformat{\paragraph}[runin]
+  {\normalfont\normalsize\bfseries}
+  {\theparagraph}{1em}{}
+
+\titleformat{\subparagraph}[runin]
+  {\normalfont\normalsize\bfseries}
+  {\thesubparagraph}{1em}{}
+
+% Espaciado consistente
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% =========================
+% NOMBRES EN ESPAÑOL
+% =========================
+
+\addto\captionsspanish{
+}
+
+% =========================
+% BIBLIOGRAFÍA
+% =========================
+
+\usepackage{csquotes}

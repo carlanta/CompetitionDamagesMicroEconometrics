@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Estimación del lucro cesante (Lost Profits) – Cuantificación de Daños Antitrust</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11-analisis-financiero.html" rel="next">
+<link href="./09-passing-on.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-lucro-cesante.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Estimación del lucro cesante (<em>Lost Profits</em>)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Cuantificación de Daños Antitrust</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/carlanta/CompetitionDamagesMicroEconometrics" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prólogo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduccion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a la cuantificación de daños económicos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-conductas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conductas ilícitas y su impacto económico</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-causalidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Causalidad, atribución y concurrencia de causas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-datos-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datos y evidencia para la cuantificación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-before-after.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Método antes-y-después (<em>Before-and-After</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-comparables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Método de comparables (<em>Yardstick</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-did.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Diferencias en diferencias (DID)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-sobreprecio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Estimación del sobreprecio (<em>Overcharge</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-passing-on.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">El <em>passing-on</em> y la cadena de distribución</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-lucro-cesante.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Estimación del lucro cesante (<em>Lost Profits</em>)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-analisis-financiero.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Análisis financiero-contable del daño</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-endogeneidad-iv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Endogeneidad y variables instrumentales</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-panel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datos de panel y efectos fijos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-control-sintetico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Control sintético</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-regresion-cuantilica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Regresión cuantílica y efectos heterogéneos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-intereses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Actualización financiera y cálculo de intereses</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-sensibilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Análisis de sensibilidad y robustez</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-errores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Errores frecuentes en informes periciales de daños</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-informe-pericial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Redacción y defensa del informe pericial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bibliografía</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#cuánto-habría-ganado-la-empresa-sin-la-conducta-ilícita" id="toc-cuánto-habría-ganado-la-empresa-sin-la-conducta-ilícita" class="nav-link active" data-scroll-target="#cuánto-habría-ganado-la-empresa-sin-la-conducta-ilícita"><span class="header-section-number">10.1</span> Cuánto habría ganado la empresa sin la conducta ilícita</a></li>
+  <li><a href="#la-intuición-proyectar-los-beneficios-que-no-llegaron-a-existir" id="toc-la-intuición-proyectar-los-beneficios-que-no-llegaron-a-existir" class="nav-link" data-scroll-target="#la-intuición-proyectar-los-beneficios-que-no-llegaron-a-existir"><span class="header-section-number">10.2</span> La intuición: proyectar los beneficios que no llegaron a existir</a></li>
+  <li><a href="#los-márgenes-qué-beneficio-se-pierde-realmente" id="toc-los-márgenes-qué-beneficio-se-pierde-realmente" class="nav-link" data-scroll-target="#los-márgenes-qué-beneficio-se-pierde-realmente"><span class="header-section-number">10.3</span> Los márgenes: qué beneficio se pierde realmente</a></li>
+  <li><a href="#la-idea-econométrica-proyectar-el-contrafactual-de-ingresos" id="toc-la-idea-econométrica-proyectar-el-contrafactual-de-ingresos" class="nav-link" data-scroll-target="#la-idea-econométrica-proyectar-el-contrafactual-de-ingresos"><span class="header-section-number">10.4</span> La idea econométrica: proyectar el contrafactual de ingresos</a></li>
+  <li><a href="#actualización-financiera-el-valor-temporal-del-dinero" id="toc-actualización-financiera-el-valor-temporal-del-dinero" class="nav-link" data-scroll-target="#actualización-financiera-el-valor-temporal-del-dinero"><span class="header-section-number">10.5</span> Actualización financiera: el valor temporal del dinero</a></li>
+  <li><a href="#implementación-en-r-del-modelo-al-informe" id="toc-implementación-en-r-del-modelo-al-informe" class="nav-link" data-scroll-target="#implementación-en-r-del-modelo-al-informe"><span class="header-section-number">10.6</span> Implementación en R: del modelo al informe</a></li>
+  <li><a href="#relevancia-jurídica-del-lucro-cesante" id="toc-relevancia-jurídica-del-lucro-cesante" class="nav-link" data-scroll-target="#relevancia-jurídica-del-lucro-cesante"><span class="header-section-number">10.7</span> Relevancia jurídica del lucro cesante</a></li>
+  <li><a href="#sensibilidad-margen-horizonte-y-tasa-de-descuento" id="toc-sensibilidad-margen-horizonte-y-tasa-de-descuento" class="nav-link" data-scroll-target="#sensibilidad-margen-horizonte-y-tasa-de-descuento"><span class="header-section-number">10.8</span> Sensibilidad: margen, horizonte y tasa de descuento</a></li>
+  <li><a href="#errores-frecuentes-en-la-estimación-del-lucro-cesante" id="toc-errores-frecuentes-en-la-estimación-del-lucro-cesante" class="nav-link" data-scroll-target="#errores-frecuentes-en-la-estimación-del-lucro-cesante"><span class="header-section-number">10.9</span> Errores frecuentes en la estimación del lucro cesante</a></li>
+  <li><a href="#lo-que-un-tribunal-debe-retener" id="toc-lo-que-un-tribunal-debe-retener" class="nav-link" data-scroll-target="#lo-que-un-tribunal-debe-retener"><span class="header-section-number">10.10</span> Lo que un tribunal debe retener</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/carlanta/CompetitionDamagesMicroEconometrics/blob/main/10-lucro-cesante.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="lucro-cesante" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Estimación del lucro cesante (<em>Lost Profits</em>)</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="cuánto-habría-ganado-la-empresa-sin-la-conducta-ilícita" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="cuánto-habría-ganado-la-empresa-sin-la-conducta-ilícita"><span class="header-section-number">10.1</span> Cuánto habría ganado la empresa sin la conducta ilícita</h2>
+<p>El lucro cesante es, junto con el sobreprecio, la categoría de daño más frecuente en la litigación de competencia. Pero mientras el sobreprecio se manifiesta como un precio excesivo que el comprador paga, el lucro cesante se manifiesta como un beneficio que la víctima deja de obtener. Es un daño por omisión: lo que habría ocurrido pero no ocurrió.</p>
+<p>La cuantificación del lucro cesante aparece con especial frecuencia en tres tipos de casos. En los supuestos de <strong>exclusión de mercado</strong> —precios predatorios, negativa de suministro, abuso de posición dominante mediante descuentos fidelizadores—, la víctima pierde ventas, clientes y cuota de mercado como consecuencia de la conducta. En los casos de <strong>competencia desleal</strong> —denigración, imitación, captación ilícita de clientela—, la víctima experimenta una caída de ingresos directamente atribuible a la conducta del infractor. En los casos de <strong>violación de secretos empresariales</strong> o <strong>ruptura inducida de contratos</strong>, la víctima pierde una ventaja competitiva que se habría traducido en beneficios durante un período determinado.</p>
+<p>En todos estos supuestos, la pregunta del perito es la misma: ¿cuánto habría ganado la empresa si la conducta ilícita no se hubiera producido? Responderla exige proyectar beneficios contrafactuales, identificar los márgenes relevantes, descontar los costes evitados y, en su caso, actualizar financieramente las cantidades al momento de la valoración.</p>
+</section>
+<section id="la-intuición-proyectar-los-beneficios-que-no-llegaron-a-existir" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="la-intuición-proyectar-los-beneficios-que-no-llegaron-a-existir"><span class="header-section-number">10.2</span> La intuición: proyectar los beneficios que no llegaron a existir</h2>
+<p>La lógica del lucro cesante puede formularse con una aritmética engañosamente sencilla:</p>
+<p><span class="math display">\[
+\text{Lucro cesante} = \text{Beneficio contrafactual} - \text{Beneficio observado}
+\]</span></p>
+<p>El beneficio contrafactual es el que la empresa habría obtenido sin la conducta ilícita. El beneficio observado es el que efectivamente obtuvo. La diferencia es el lucro cesante.</p>
+<p>Pero detrás de esa fórmula simple se esconden decisiones metodológicas complejas. ¿Qué margen utilizar para convertir ventas perdidas en beneficios perdidos? ¿Cómo proyectar la trayectoria de ventas contrafactual? ¿Qué costes habría soportado la empresa si hubiera vendido más? ¿A qué tasa se actualiza el daño pasado al valor presente?</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1010</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">72</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fecha <span class="ot">&lt;-</span> <span class="fu">seq.Date</span>(<span class="fu">as.Date</span>(<span class="st">"2018-01-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>, <span class="at">length.out =</span> n)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mes_num <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(fecha, <span class="st">"%m"</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>inicio_exclusion <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2021-01-01"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>fin_exclusion <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2023-06-01"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ingresos</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ingresos_cf <span class="ot">&lt;-</span> <span class="dv">500</span> <span class="sc">+</span> <span class="fl">4.5</span> <span class="sc">*</span> t <span class="sc">+</span> <span class="dv">30</span> <span class="sc">*</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> t <span class="sc">/</span> <span class="dv">12</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">12</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>efecto_exclusion <span class="ot">&lt;-</span> <span class="fu">if_else</span>(fecha <span class="sc">&gt;=</span> inicio_exclusion <span class="sc">&amp;</span> fecha <span class="sc">&lt;=</span> fin_exclusion,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                            <span class="sc">-</span><span class="dv">120</span> <span class="sc">-</span> <span class="fl">0.8</span> <span class="sc">*</span> (t <span class="sc">-</span> <span class="dv">36</span>), <span class="dv">0</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>efecto_post <span class="ot">&lt;-</span> <span class="fu">if_else</span>(fecha <span class="sc">&gt;</span> fin_exclusion,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                       (<span class="sc">-</span><span class="dv">120</span> <span class="sc">-</span> <span class="fl">0.8</span> <span class="sc">*</span> <span class="dv">30</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.15</span> <span class="sc">*</span> (t <span class="sc">-</span> <span class="dv">66</span>)), <span class="dv">0</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>ingresos_obs <span class="ot">&lt;-</span> ingresos_cf <span class="sc">+</span> efecto_exclusion <span class="sc">+</span> efecto_post <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Costes variables (proporcionales a ingresos)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>ratio_cv <span class="ot">&lt;-</span> <span class="fl">0.58</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>costes_variables_cf <span class="ot">&lt;-</span> ratio_cv <span class="sc">*</span> ingresos_cf <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>costes_variables_obs <span class="ot">&lt;-</span> ratio_cv <span class="sc">*</span> ingresos_obs <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Costes fijos</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>costes_fijos <span class="ot">&lt;-</span> <span class="dv">120</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> t <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Beneficios</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>beneficio_cf <span class="ot">&lt;-</span> ingresos_cf <span class="sc">-</span> costes_variables_cf <span class="sc">-</span> costes_fijos</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>beneficio_obs <span class="ot">&lt;-</span> ingresos_obs <span class="sc">-</span> costes_variables_obs <span class="sc">-</span> costes_fijos</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>df_lc <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">fecha =</span> fecha, <span class="at">t =</span> t, <span class="at">mes =</span> mes_num,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">ingresos_cf =</span> <span class="fu">round</span>(ingresos_cf, <span class="dv">2</span>),</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">ingresos_obs =</span> <span class="fu">round</span>(ingresos_obs, <span class="dv">2</span>),</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">costes_variables_cf =</span> <span class="fu">round</span>(costes_variables_cf, <span class="dv">2</span>),</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">costes_variables_obs =</span> <span class="fu">round</span>(costes_variables_obs, <span class="dv">2</span>),</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">costes_fijos =</span> <span class="fu">round</span>(costes_fijos, <span class="dv">2</span>),</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">beneficio_cf =</span> <span class="fu">round</span>(beneficio_cf, <span class="dv">2</span>),</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">beneficio_obs =</span> <span class="fu">round</span>(beneficio_obs, <span class="dv">2</span>),</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">exclusion =</span> <span class="fu">if_else</span>(fecha <span class="sc">&gt;=</span> inicio_exclusion, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> df_lc <span class="sc">|&gt;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(fecha, beneficio_cf, beneficio_obs) <span class="sc">|&gt;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>fecha, <span class="at">names_to =</span> <span class="st">"escenario"</span>, <span class="at">values_to =</span> <span class="st">"beneficio"</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_plot, <span class="fu">aes</span>(<span class="at">x =</span> fecha, <span class="at">y =</span> beneficio, <span class="at">color =</span> escenario)) <span class="sc">+</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">xmin =</span> inicio_exclusion, <span class="at">xmax =</span> fin_exclusion,</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>           <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>, <span class="at">fill =</span> <span class="st">"#e74c3c"</span>, <span class="at">alpha =</span> <span class="fl">0.06</span>) <span class="sc">+</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.95</span>) <span class="sc">+</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> inicio_exclusion, <span class="at">color =</span> <span class="st">"grey50"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> fin_exclusion, <span class="at">color =</span> <span class="st">"grey50"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"beneficio_cf"</span> <span class="ot">=</span> <span class="st">"#2c3e50"</span>, <span class="st">"beneficio_obs"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>),</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Beneficio contrafactual"</span>, <span class="st">"Beneficio observado"</span>)) <span class="sc">+</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Beneficio mensual (miles EUR)"</span>, <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-lucro-cesante-intuicion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lucro-cesante-intuicion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-lucro-cesante_files/figure-html/fig-lucro-cesante-intuicion-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lucro-cesante-intuicion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: Lógica del lucro cesante: la brecha entre el beneficio contrafactual proyectado y el beneficio observado constituye el daño
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>La <a href="#fig-lucro-cesante-intuicion" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> muestra la brecha entre el beneficio que la empresa habría obtenido (línea oscura) y el que realmente obtuvo (línea roja). El área entre ambas curvas durante el período de exclusión —y durante la fase de recuperación posterior— constituye el lucro cesante.</p>
+</section>
+<section id="los-márgenes-qué-beneficio-se-pierde-realmente" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="los-márgenes-qué-beneficio-se-pierde-realmente"><span class="header-section-number">10.3</span> Los márgenes: qué beneficio se pierde realmente</h2>
+<p>No toda venta perdida se traduce en beneficio perdido en la misma proporción. Si la empresa habría vendido 100 unidades más a 50 euros cada una, sus ingresos perdidos serían 5.000 euros. Pero para producir y vender esas unidades adicionales habría incurrido en costes variables —materias primas, comisiones, transporte—. Solo el margen de contribución de esas ventas constituye lucro cesante.</p>
+<p>El <strong>margen de contribución</strong> es la diferencia entre el ingreso y los costes variables directamente asociados a la producción y venta del producto. Los costes fijos —alquiler, nóminas de estructura, amortizaciones— no se incluyen porque la empresa los soporta independientemente de si vende o no las unidades perdidas.</p>
+<p><span class="math display">\[
+\text{Lucro cesante}_t = (Y_t^{0} - Y_t) \cdot m_c
+\]</span></p>
+<p>donde <span class="math inline">\(Y_t^{0}\)</span> son los ingresos contrafactuales, <span class="math inline">\(Y_t\)</span> los ingresos observados y <span class="math inline">\(m_c\)</span> es el margen de contribución.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>margenes <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Margen =</span> <span class="fu">c</span>(<span class="st">"Margen bruto"</span>, <span class="st">"Margen de contribución"</span>, <span class="st">"EBITDA"</span>, <span class="st">"Beneficio neto"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  Fórmula <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"(Ingresos - Coste de ventas) / Ingresos"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">"(Ingresos - Costes variables) / Ingresos"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">"(Ingresos - Costes operativos) / Ingresos"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">"(Ingresos - Todos los costes - Impuestos) / Ingresos"</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Uso en lucro cesante</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Aproximación gruesa; incluye costes fijos de producción"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"El más adecuado para ventas perdidas marginales"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Útil cuando se dispone de datos operativos agregados"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Inadecuado: incluye costes no evitados"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>margenes <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"pipe"</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"l"</span>, <span class="st">"l"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-margenes" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-margenes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.1: Márgenes relevantes para la cuantificación del lucro cesante
+</figcaption>
+<div aria-describedby="tbl-margenes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 40%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Margen</th>
+<th style="text-align: left;">Fórmula</th>
+<th style="text-align: left;">Uso en lucro cesante</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Margen bruto</td>
+<td style="text-align: left;">(Ingresos - Coste de ventas) / Ingresos</td>
+<td style="text-align: left;">Aproximación gruesa; incluye costes fijos de producción</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Margen de contribución</td>
+<td style="text-align: left;">(Ingresos - Costes variables) / Ingresos</td>
+<td style="text-align: left;">El más adecuado para ventas perdidas marginales</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EBITDA</td>
+<td style="text-align: left;">(Ingresos - Costes operativos) / Ingresos</td>
+<td style="text-align: left;">Útil cuando se dispone de datos operativos agregados</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Beneficio neto</td>
+<td style="text-align: left;">(Ingresos - Todos los costes - Impuestos) / Ingresos</td>
+<td style="text-align: left;">Inadecuado: incluye costes no evitados</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="la-idea-econométrica-proyectar-el-contrafactual-de-ingresos" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="la-idea-econométrica-proyectar-el-contrafactual-de-ingresos"><span class="header-section-number">10.4</span> La idea econométrica: proyectar el contrafactual de ingresos</h2>
+<p>La proyección del beneficio contrafactual combina dos elementos: una estimación de los ingresos que la empresa habría obtenido (utilizando los métodos de los capítulos 5 a 7) y una estimación del margen aplicable a esos ingresos.</p>
+<p>Para los ingresos contrafactuales, el perito puede utilizar cualquiera de los métodos ya estudiados: el antes-y-después (Cap. 5), los comparables (Cap. 6) o las diferencias en diferencias (Cap. 7). La elección depende, como siempre, de los datos disponibles y de las circunstancias del caso.</p>
+<p>Una vez estimados los ingresos contrafactuales <span class="math inline">\(Y_t^{0}\)</span>, el lucro cesante se calcula como:</p>
+<p><span class="math display">\[
+LC = \sum_{t \in \text{daño}} (Y_t^{0} - Y_t) \cdot m_c - CE_t
+\]</span></p>
+<p>donde <span class="math inline">\(CE_t\)</span> representa los costes evitados: gastos que la empresa dejó de soportar precisamente porque no realizó las ventas perdidas. Olvidar este componente es uno de los errores más frecuentes en la práctica.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>margen_contribucion <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> ratio_cv</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_lc <span class="ot">&lt;-</span> df_lc <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ingresos_perdidos =</span> <span class="fu">if_else</span>(exclusion <span class="sc">==</span> <span class="dv">1</span>, ingresos_cf <span class="sc">-</span> ingresos_obs, <span class="dv">0</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">lucro_bruto =</span> ingresos_perdidos <span class="sc">*</span> margen_contribucion,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">costes_evitados =</span> <span class="fu">if_else</span>(exclusion <span class="sc">==</span> <span class="dv">1</span>, costes_variables_cf <span class="sc">-</span> costes_variables_obs, <span class="dv">0</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lucro_neto =</span> <span class="fu">if_else</span>(exclusion <span class="sc">==</span> <span class="dv">1</span>, beneficio_cf <span class="sc">-</span> beneficio_obs, <span class="dv">0</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>resumen_lc <span class="ot">&lt;-</span> df_lc <span class="sc">|&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(exclusion <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Meses afectados</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>(),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Ingresos perdidos totales</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">sum</span>(ingresos_perdidos), <span class="dv">2</span>),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Margen de contribución</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(margen_contribucion, <span class="dv">4</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Lucro bruto (ingresos × margen)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">sum</span>(lucro_bruto), <span class="dv">2</span>),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Costes evitados</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">sum</span>(costes_evitados), <span class="dv">2</span>),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Lucro cesante neto</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">sum</span>(lucro_neto), <span class="dv">2</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>resumen_lc <span class="sc">|&gt;</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"Concepto"</span>, <span class="at">values_to =</span> <span class="st">"Valor"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"pipe"</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"r"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-lucro-cesante-dano" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lucro-cesante-dano-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.2: Cuantificación del lucro cesante: ingresos perdidos, margen de contribución y costes evitados
+</figcaption>
+<div aria-describedby="tbl-lucro-cesante-dano-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: right;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Meses afectados</td>
+<td style="text-align: right;">36.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ingresos perdidos totales</td>
+<td style="text-align: right;">4498.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Margen de contribución</td>
+<td style="text-align: right;">0.42</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lucro bruto (ingresos × margen)</td>
+<td style="text-align: right;">1889.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Costes evitados</td>
+<td style="text-align: right;">2690.68</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lucro cesante neto</td>
+<td style="text-align: right;">1807.60</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="actualización-financiera-el-valor-temporal-del-dinero" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="actualización-financiera-el-valor-temporal-del-dinero"><span class="header-section-number">10.5</span> Actualización financiera: el valor temporal del dinero</h2>
+<p>El lucro cesante se produce a lo largo de un período. Un euro perdido en enero de 2021 no tiene el mismo valor económico que un euro perdido en diciembre de 2023. La actualización financiera traslada todas las cantidades a una fecha de referencia común —típicamente la fecha de la sentencia o la fecha del informe pericial— aplicando una tasa de descuento.</p>
+<p><span class="math display">\[
+LC_{actualizado} = \sum_{t \in \text{daño}} LC_t \cdot (1 + r)^{T - t}
+\]</span></p>
+<p>donde <span class="math inline">\(r\)</span> es la tasa de descuento mensual y <span class="math inline">\(T\)</span> es el período de referencia. La elección de la tasa de descuento es, en sí misma, una decisión relevante: el tipo legal de interés, el WACC de la empresa, el tipo libre de riesgo más una prima o el coste de financiación son opciones que producen resultados distintos.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fecha_ref <span class="ot">&lt;-</span> <span class="fu">max</span>(fecha)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>T_ref <span class="ot">&lt;-</span> <span class="fu">which</span>(fecha <span class="sc">==</span> fecha_ref)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>actualizar <span class="ot">&lt;-</span> <span class="cf">function</span>(data, tasa_anual) {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  r_mensual <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> tasa_anual)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(exclusion <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">factor_actualizacion =</span> (<span class="dv">1</span> <span class="sc">+</span> r_mensual)<span class="sc">^</span>(T_ref <span class="sc">-</span> t)) <span class="sc">|&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">LC_actualizado =</span> <span class="fu">round</span>(<span class="fu">sum</span>(lucro_neto <span class="sc">*</span> factor_actualizacion), <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Tasa anual</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="fu">round</span>(tasa_anual <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>), <span class="st">"%"</span>))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>sens_tasa <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actualizar</span>(df_lc, <span class="fl">0.02</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actualizar</span>(df_lc, <span class="fl">0.04</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actualizar</span>(df_lc, <span class="fl">0.06</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actualizar</span>(df_lc, <span class="fl">0.08</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Tasa anual</span><span class="st">`</span>, <span class="st">`</span><span class="at">Lucro cesante actualizado</span><span class="st">`</span> <span class="ot">=</span> LC_actualizado)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>sens_tasa <span class="sc">|&gt;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"pipe"</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"r"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-lucro-cesante-actualizado" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lucro-cesante-actualizado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.3: Lucro cesante actualizado bajo diferentes tasas de descuento
+</figcaption>
+<div aria-describedby="tbl-lucro-cesante-actualizado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tasa anual</th>
+<th style="text-align: right;">Lucro cesante actualizado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2%</td>
+<td style="text-align: right;">1862.67</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4%</td>
+<td style="text-align: right;">1918.79</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6%</td>
+<td style="text-align: right;">1975.97</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8%</td>
+<td style="text-align: right;">2034.23</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>La <a href="#tbl-lucro-cesante-actualizado" class="quarto-xref">Table&nbsp;<span>10.3</span></a> muestra cómo la tasa de descuento afecta al resultado final. A mayor tasa, mayor es el valor actualizado del daño pasado (porque se capitaliza hacia adelante). Esta sensibilidad obliga al perito a justificar la tasa elegida y a presentar un rango de resultados.</p>
+</section>
+<section id="implementación-en-r-del-modelo-al-informe" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="implementación-en-r-del-modelo-al-informe"><span class="header-section-number">10.6</span> Implementación en R: del modelo al informe</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Proyectar ingresos contrafactuales (p.ej. antes-y-después)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>modelo_pre <span class="ot">&lt;-</span> <span class="fu">lm</span>(ingresos <span class="sc">~</span> t <span class="sc">+</span> <span class="fu">factor</span>(mes), <span class="at">data =</span> datos <span class="sc">|&gt;</span> <span class="fu">filter</span>(fecha <span class="sc">&lt;</span> inicio))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>ingresos_cf <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_pre, <span class="at">newdata =</span> datos)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calcular lucro cesante con margen de contribución</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>margen_c <span class="ot">&lt;-</span> <span class="fl">0.42</span>  <span class="co"># estimado a partir de contabilidad analítica</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ingresos_perdidos =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, ingresos_cf <span class="sc">-</span> ingresos),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">lucro_cesante     =</span> ingresos_perdidos <span class="sc">*</span> margen_c</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Actualizar financieramente</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.05</span>)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>) <span class="sc">-</span> <span class="dv">1</span>  <span class="co"># tasa anual del 5%</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>T_ref <span class="ot">&lt;-</span> <span class="fu">max</span>(datos<span class="sc">$</span>t)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">factor_act =</span> (<span class="dv">1</span> <span class="sc">+</span> r)<span class="sc">^</span>(T_ref <span class="sc">-</span> t),</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">lucro_actualizado =</span> lucro_cesante <span class="sc">*</span> factor_act</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>total_actualizado <span class="ot">&lt;-</span> <span class="fu">sum</span>(datos<span class="sc">$</span>lucro_actualizado, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_lc_mensual <span class="ot">&lt;-</span> df_lc <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(exclusion <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(fecha, lucro_neto)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_lc_mensual, <span class="fu">aes</span>(<span class="at">x =</span> fecha, <span class="at">y =</span> lucro_neto)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#c0392b"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Lucro cesante mensual (miles EUR)"</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-lucro-cesante-mensual" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lucro-cesante-mensual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-lucro-cesante_files/figure-html/fig-lucro-cesante-mensual-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lucro-cesante-mensual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: Lucro cesante mensual: la brecha de beneficios convertida en daño indemnizable
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relevancia-jurídica-del-lucro-cesante" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="relevancia-jurídica-del-lucro-cesante"><span class="header-section-number">10.7</span> Relevancia jurídica del lucro cesante</h2>
+<p>El lucro cesante es una categoría de daño reconocida expresamente en el artículo 3 de la Directiva 2014/104/UE como componente del principio de restitución íntegra. El TJUE, en <em>Manfredi</em> (2006), estableció que la reparación debe abarcar tanto el daño real (<em>damnum emergens</em>) como el lucro cesante, más intereses.</p>
+<p>En la práctica española, el lucro cesante es especialmente relevante en los supuestos de competencia desleal. Las acciones por denigración, imitación desleal o captación ilícita de clientela suelen cuantificarse en términos de beneficios perdidos, no de sobreprecio. La jurisprudencia del Tribunal Supremo exige que el lucro cesante no sea meramente hipotético: debe acreditarse con un grado razonable de probabilidad, apoyado en datos contables, tendencias históricas y análisis económico riguroso.</p>
+<p>La Guía Práctica de la Comisión Europea reconoce los métodos de proyección de beneficios como herramientas válidas para la cuantificación, e insiste en la importancia de utilizar el margen adecuado y de descontar los costes evitados.</p>
+</section>
+<section id="sensibilidad-margen-horizonte-y-tasa-de-descuento" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="sensibilidad-margen-horizonte-y-tasa-de-descuento"><span class="header-section-number">10.8</span> Sensibilidad: margen, horizonte y tasa de descuento</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ingresos_perdidos_total <span class="ot">&lt;-</span> <span class="fu">sum</span>(df_lc<span class="sc">$</span>ingresos_perdidos[df_lc<span class="sc">$</span>exclusion <span class="sc">==</span> <span class="dv">1</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>sens_lc <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Supuesto =</span> <span class="fu">c</span>(<span class="st">"Margen contribución 35%"</span>, <span class="st">"Margen contribución 42%"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Margen contribución 50%"</span>, <span class="st">"Solo período exclusión (sin persistencia)"</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Lucro cesante</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ingresos_perdidos_total <span class="sc">*</span> <span class="fl">0.35</span>, <span class="dv">2</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ingresos_perdidos_total <span class="sc">*</span> <span class="fl">0.42</span>, <span class="dv">2</span>),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ingresos_perdidos_total <span class="sc">*</span> <span class="fl">0.50</span>, <span class="dv">2</span>),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">sum</span>(df_lc<span class="sc">$</span>ingresos_perdidos[df_lc<span class="sc">$</span>fecha <span class="sc">&gt;=</span> inicio_exclusion <span class="sc">&amp;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                                        df_lc<span class="sc">$</span>fecha <span class="sc">&lt;=</span> fin_exclusion]) <span class="sc">*</span> margen_contribucion, <span class="dv">2</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>sens_lc <span class="sc">|&gt;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"pipe"</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"r"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-lucro-cesante-sensibilidad" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lucro-cesante-sensibilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.4: Análisis de sensibilidad del lucro cesante bajo diferentes supuestos
+</figcaption>
+<div aria-describedby="tbl-lucro-cesante-sensibilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Supuesto</th>
+<th style="text-align: right;">Lucro cesante</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Margen contribución 35%</td>
+<td style="text-align: right;">1574.40</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Margen contribución 42%</td>
+<td style="text-align: right;">1889.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Margen contribución 50%</td>
+<td style="text-align: right;">2249.14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solo período exclusión (sin persistencia)</td>
+<td style="text-align: right;">1667.83</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>La <a href="#tbl-lucro-cesante-sensibilidad" class="quarto-xref">Table&nbsp;<span>10.4</span></a> ilustra la dependencia del resultado respecto del margen elegido. Un margen de contribución del 35% produce un lucro cesante muy inferior al que resulta con un margen del 50%. Esta sensibilidad obliga al perito a justificar su elección con datos contables de la empresa y del sector, y a presentar un rango razonable.</p>
+</section>
+<section id="errores-frecuentes-en-la-estimación-del-lucro-cesante" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="errores-frecuentes-en-la-estimación-del-lucro-cesante"><span class="header-section-number">10.9</span> Errores frecuentes en la estimación del lucro cesante</h2>
+<p>El error más común es utilizar el margen neto en lugar del margen de contribución. El margen neto incluye costes fijos que la empresa habría soportado de todos modos —alquileres, amortizaciones, nóminas de estructura—. Utilizarlo subestima el lucro cesante porque descuenta costes que no son evitados.</p>
+<p>El segundo error es proyectar un crecimiento contrafactual irreal. Si la empresa venía creciendo al 3% anual y el perito proyecta un crecimiento del 10%, la estimación del lucro cesante se infla artificialmente. La proyección debe ser conservadora y estar anclada en la trayectoria histórica y en las condiciones del mercado.</p>
+<p>El tercer error es olvidar los costes evitados. Si la empresa dejó de vender 1.000 unidades, también dejó de comprar las materias primas, pagar las comisiones de venta y soportar los costes logísticos correspondientes. El lucro cesante no es igual a los ingresos perdidos; es la diferencia entre ingresos perdidos y costes evitados.</p>
+<p>El cuarto error es no actualizar financieramente el daño. Un lucro cesante que se produjo hace tres años tiene un valor presente distinto del que se produjo hace seis meses. La omisión de la actualización puede infravalorar o sobrevalorar el daño según la dirección de los tipos de interés.</p>
+<p>Por último, un error estratégico: no distinguir entre el lucro cesante y el daño emergente. El lucro cesante se refiere a beneficios futuros no realizados; el daño emergente se refiere a pérdidas patrimoniales ya materializadas. Ambos son indemnizables, pero su cuantificación sigue lógicas distintas y mezclarlos genera confusión.</p>
+</section>
+<section id="lo-que-un-tribunal-debe-retener" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="lo-que-un-tribunal-debe-retener"><span class="header-section-number">10.10</span> Lo que un tribunal debe retener</h2>
+<p>El lucro cesante mide cuánto habría ganado la víctima si la conducta ilícita no se hubiera producido. Estimarlo exige tres pasos encadenados: proyectar los ingresos contrafactuales, aplicar el margen de contribución correcto y descontar los costes evitados. Cuando se añade la actualización financiera, el resultado traduce la brecha de beneficios en una cifra expresada en euros de hoy.</p>
+<p>La credibilidad de la estimación depende de la razonabilidad de la proyección, de la adecuación del margen y de la transparencia del cálculo. Un tribunal que vea estos tres elementos bien documentados y sometidos a análisis de sensibilidad tendrá una base sólida para cuantificar el perjuicio.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-passing-on.html" class="pagination-link" aria-label="El *passing-on* y la cadena de distribución">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">El <em>passing-on</em> y la cadena de distribución</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./11-analisis-financiero.html" class="pagination-link" aria-label="Análisis financiero-contable del daño">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Análisis financiero-contable del daño</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/carlanta/CompetitionDamagesMicroEconometrics/blob/main/10-lucro-cesante.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
