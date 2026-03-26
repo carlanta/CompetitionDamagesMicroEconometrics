@@ -1,13 +1,15 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-/.quarto/
-_build/
+# Ignorar todo por defecto
+*
+
+# Incluir solo lo que va al repo
+!.gitignore
+!README.md
+!data/
+!data/**
+!scripts/
+!scripts/**
+!docs/
+!docs/**
+
+# Seguridad (siempre ignorar)
 GitHubToken
-*.log
-_book/
-backup/
-output/
-_freeze/
-.nojekyll

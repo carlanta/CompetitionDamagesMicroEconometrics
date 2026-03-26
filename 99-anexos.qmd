@@ -1,7 +1,0 @@
-
-# Anexos
-
-\renewcommand{\listfigurename}{Índice de figuras}
-\listoffigures
-
-\newpage
