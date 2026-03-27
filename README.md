@@ -85,6 +85,8 @@ source("scripts/08-sobreprecio.R")
 Estos scripts requieren el contexto metodológico del libro.
 Los datos han sido simplificados / anonimizados.
 
+---
+
 ### Marco normativo de referencia
 
 - Directiva 2014/104/UE (daños por infracciones del Derecho de la competencia)
