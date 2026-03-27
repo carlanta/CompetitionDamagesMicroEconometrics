@@ -85,6 +85,11 @@ source("scripts/08-sobreprecio.R")
 Estos scripts requieren el contexto metodológico del libro.
 Los datos han sido simplificados / anonimizados.
 
+### Requisitos
+
+- R >= 4.0
+- Paquetes: `tidyverse`, `kableExtra`, `fixest`, `plm`, `AER`, `ivreg`, `quantreg`
+
 ---
 
 ### Marco normativo de referencia
@@ -92,11 +97,6 @@ Los datos han sido simplificados / anonimizados.
 - Directiva 2014/104/UE (daños por infracciones del Derecho de la competencia)
 - Guía Práctica de la Comisión Europea para la cuantificación del daño (2013)
 - Jurisprudencia TJUE: Courage, Manfredi, Kone, Skanska
-
-### Requisitos
-
-- R >= 4.0
-- Paquetes: `tidyverse`, `kableExtra`, `fixest`, `plm`, `AER`, `ivreg`, `quantreg`
 
 ---
 
